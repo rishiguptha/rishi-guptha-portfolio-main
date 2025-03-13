@@ -1,5 +1,6 @@
 // src/components/ProjectModal.tsx
 import React from 'react';
+import { createRipple } from "@/lib/ripple";
 import {
   Dialog,
   DialogTrigger,
@@ -22,9 +23,9 @@ interface ProjectModalProps {
 const ProjectModal: React.FC<ProjectModalProps> = ({ project }) => {
   return (
     <Dialog>
-      {/* The trigger button uses your site’s button style */}
       <DialogTrigger asChild>
         <button
+          onClick={(e) => createRipple(e)}
           className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-full font-medium transition-transform duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
         >
           View Project
