@@ -3,7 +3,6 @@ import React from 'react';
 import SectionTitle from './SectionTitle';
 import ProfileImage from './ProfileImage';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import SkillBadge from './SkillBadge';
 import { SKILLS } from '@/lib/constants';
 import { motion } from 'framer-motion';
 
