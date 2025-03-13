@@ -98,11 +98,16 @@ html {
   }
   
   .reveal {
-    @apply opacity-0 transition-all duration-700 translate-y-8;
+    opacity: 0;
+    transform: translateY(20px);
+    will-change: transform, opacity;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .reveal.active {
-    @apply opacity-100 translate-y-0;
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* Enhanced styles for interactivity */
@@ -226,5 +231,12 @@ html {
   
   .animate-ripple {
     animation: ripple 1s ease-out forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.active {
+    transition: none !important;
   }
 }
