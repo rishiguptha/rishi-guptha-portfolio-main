@@ -72,7 +72,7 @@ export const PROJECTS = [
     description: 'Develop a system for recognizing hand-written characters using deep learning.',
     technologies: ['Python', 'Keras', 'Tensorflow', 'Pandas', 'CNN'],
     imageUrl: 'https://images.unsplash.com/photo-1610413343717-9c04a2b23cc0?auto=format&fit=crop&w=800&q=80',
-    categories: ['Machine Learning’, ‘Data Science’]
+    categories: ['Machine Learning', 'Data Science']
   },
   {
     title: 'Book Recommendation System',
