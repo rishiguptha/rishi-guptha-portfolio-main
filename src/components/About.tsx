@@ -4,12 +4,22 @@ import SectionTitle from './SectionTitle';
 import ProfileImage from './ProfileImage';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { SKILLS } from '@/lib/constants';
+import { motion } from 'framer-motion';
+
 
 const About: React.FC = () => {
   const contentRef = useScrollReveal();
   const skillsRef = useScrollReveal();
 
   return (
+    <motion.section
+      id="about"
+      className="section-container"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
     <section id="about" className="section-container">
       <SectionTitle title="ABOUT ME" subtitle="My Introduction" />
       
@@ -47,6 +57,7 @@ const About: React.FC = () => {
         </div>
       </div>
     </section>
+    </motion.section>
   );
 };
 
