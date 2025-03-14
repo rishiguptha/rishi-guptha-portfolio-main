@@ -71,7 +71,7 @@ export const PROJECTS = [
     title: 'Hand Written Character Recognition',
     description: 'Develop a system for recognizing hand-written characters using deep learning.',
     technologies: ['Python', 'Keras', 'Tensorflow', 'Pandas', 'CNN'],
-    imageUrl: 'https://images.unsplash.com/photo-1610413343717-9c04a2b23cc0?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1581091870624-0cf5a90aa136?auto=format&fit=crop&w=800&q=80',
     categories: ['Machine Learning', 'Data Science']
   },
   {
@@ -85,14 +85,14 @@ export const PROJECTS = [
     title: 'NYC Taxi Insights',
     description: 'Visualizing taxi data in NYC using cloud tools and interactive dashboards.',
     technologies: ['Google Cloud', 'Airflow', 'BigQuery', 'Looker'],
-    imageUrl: 'https://images.unsplash.com/photo-1605548230624-8d2e0412c136?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1561154464-0b231e9efdd1?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Engineering', 'Data Analysis']
   },
   {
     title: 'Sales Insights Dashboard',
     description: 'An interactive dashboard for sales data built with Power BI and SQL.',
     technologies: ['Power BI', 'SQL', 'DAX'],
-    imageUrl: 'https://images.unsplash.com/photo-1665686377065-09576c553819?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Analysis']
   },
   {
