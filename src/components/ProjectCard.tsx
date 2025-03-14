@@ -22,28 +22,28 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, technolog
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 20;
-    const rotateY = (centerX - x) / 20;
+    const rotateX = (y - centerY) / 15;  // Reduced sensitivity
+    const rotateY = (centerX - x) / 15;  // Reduced sensitivity
     setRotation({ x: rotateX, y: rotateY });
+    setIsHovered(true);
   };
 
-  const resetRotation = () => setRotation({ x: 0, y: 0 });
+  const resetRotation = () => {
+    setRotation({ x: 0, y: 0 });
+    setIsHovered(false);
+  };
+
 
   return (
     <div
       ref={cardRef}
       className="group relative overflow-hidden rounded-xl h-full glass-panel transition-all duration-500"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        resetRotation();
-      }}
+      onMouseLeave={resetRotation}
       onMouseMove={handleMouseMove}
       style={{
-        transform: isHovered
-          ? `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`
-          : 'perspective(1000px) rotateX(0) rotateY(0)',
-        transition: isHovered ? 'none' : 'transform 0.5s ease-out',
+        transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
+        transition: isHovered ? 'none' : 'transform 0.3s ease-out',
       }}
     >
       <div className="aspect-video overflow-hidden">
