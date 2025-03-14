@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProjectCard from './ProjectCard';
+import SectionTitle from './SectionTitle';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { PROJECTS } from '@/lib/constants';
 
@@ -21,7 +22,7 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="section-container">
       <div className="flex flex-col items-center mb-12">
-        <h2 className="text-3xl font-bold mb-6">Projects</h2>
+      <SectionTitle title="PROJECTS" subtitle="My Recent Work" />
         
         {/* Category Filters */}
         <div className="flex flex-wrap gap-2 mb-8 justify-center">
