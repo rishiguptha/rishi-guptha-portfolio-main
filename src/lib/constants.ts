@@ -64,49 +64,49 @@ export const PROJECTS = [
     title: 'Political Sentiment Analysis',
     description: 'Analyze political sentiment from data using Python, Pandas, Matplotlib, and TextBlob.',
     technologies: ['Python', 'Pandas', 'Matplotlib', 'TextBlob'],
-    imageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
+    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Science']
   },
   {
     title: 'Hand Written Character Recognition',
     description: 'Develop a system for recognizing hand-written characters using deep learning.',
     technologies: ['Python', 'Keras', 'Tensorflow', 'Pandas', 'CNN'],
-    imageUrl: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7',
-    categories: ['Machine Learning', 'Data Science']
+    imageUrl: 'https://images.unsplash.com/photo-1610413343717-9c04a2b23cc0?auto=format&fit=crop&w=800&q=80',
+    categories: ['Machine Learning’, ‘Data Science’]
   },
   {
     title: 'Book Recommendation System',
     description: 'A recommendation engine based on collaborative filtering and KNN.',
     technologies: ['Python', 'KNN', 'Collaborative Filtering'],
-    imageUrl: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952',
+    imageUrl: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Science', 'Machine Learning']
   },
   {
     title: 'NYC Taxi Insights',
     description: 'Visualizing taxi data in NYC using cloud tools and interactive dashboards.',
     technologies: ['Google Cloud', 'Airflow', 'BigQuery', 'Looker'],
-    imageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
+    imageUrl: 'https://images.unsplash.com/photo-1605548230624-8d2e0412c136?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Engineering', 'Data Analysis']
   },
   {
     title: 'Sales Insights Dashboard',
     description: 'An interactive dashboard for sales data built with Power BI and SQL.',
     technologies: ['Power BI', 'SQL', 'DAX'],
-    imageUrl: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952',
+    imageUrl: 'https://images.unsplash.com/photo-1665686377065-09576c553819?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Analysis']
   },
   {
     title: 'Spotify ETL Pipeline',
     description: 'An end-to-end ETL pipeline for Spotify data using AWS services.',
     technologies: ['AWS', 'Lambda', 'Glue', 'Athena'],
-    imageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158',
+    imageUrl: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Engineering']
   },
   {
     title: 'Statistical Ensemble Learning R Package',
     description: 'An R package for statistical ensemble methods in machine learning.',
     technologies: ['R', 'ML Models', 'Ensemble Learning'],
-    imageUrl: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952',
+    imageUrl: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80',
     categories: ['Machine Learning', 'Data Science']
   },
 ];
