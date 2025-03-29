@@ -103,11 +103,47 @@ export const PROJECTS = [
     categories: ['Data Engineering']
   },
   {
-    title: 'Statistical Ensemble Learning R Package',
-    description: 'An R package for statistical ensemble methods in machine learning.',
-    technologies: ['R', 'ML Models', 'Ensemble Learning'],
-    imageUrl: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80',
-    categories: ['Machine Learning', 'Data Science']
+    title: "Statistical Ensemble Learning R Package",
+    description: "An R package for statistical ensemble methods in machine learning.",
+    technologies: ["R", "ML Models", "Ensemble Learning"],
+    imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
+    categories: ["Machine Learning", "Data Science"],
+
+    // NEW FIELDS:
+    readme: `
+    ### Overview
+    This R package fuses the power of multiple machine learning algorithms—like Random Forests, Gradient Boosting, and Neural Networks—to produce a single, mighty “ensemble” model. The result? More reliable predictions, reduced variance, and fewer catastrophic failures compared to relying on a single algorithm alone.
+
+    ### Key Features
+    1. **Adaptive Weighting**: Dynamically adjusts how each model contributes to the final prediction.
+    2. **Built-In Metrics**: Evaluates performance using multiple scoring metrics, including accuracy, precision, recall, and AUC.
+    3. **Easy Customization**: Plug-and-play architecture for swapping out underlying ML algorithms with minimal configuration.
+    4. **Parallel Execution**: Harnesses multi-core processing in R to speed up model training on large datasets.
+
+    ### Installation
+    \`\`\`r
+    # Install devtools if you haven't already
+    install.packages("devtools")
+
+    # Then install the package directly from GitHub
+    devtools::install_github("YourUsername/YourRepoName")
+    \`\`\`
+
+    ### Getting Started
+    \`\`\`r
+    # Load the library
+    library(ensembleR)
+
+    # Example usage
+    data(iris)
+    model <- ensemble_fit(iris[,1:4], iris$Species)
+    predictions <- ensemble_predict(model, iris[,1:4])
+    \`\`\`
+
+    ### License
+    Distributed under the MIT License. See \`LICENSE\` file for more details.
+        `,
+    githubLink: "https://github.com/YourUsername/YourRepoName"
   },
 ];
 
