@@ -1,6 +1,5 @@
 // src/components/ProjectCard.tsx
-import React, { useState, useRef } from "react";
-import ProjectModal from "./ProjectModal";
+import React from "react";
 
 interface ProjectCardProps {
   title: string;
@@ -19,43 +18,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   githubLink,
   readme,
 }) => {
-  // 1) Remove hover/tilt states and replace with a simple "active" toggle on click
-  const [isActive, setIsActive] = useState(false);
-
   return (
     <div
-      // 2) Remove onMouseEnter, onMouseLeave, onMouseMove
-      // 3) Instead, handle a click to toggle some state or do something else
-      onClick={() => setIsActive(!isActive)}
-      className="
-        relative
-        overflow-hidden
-        rounded-xl
-        h-full
-        glass-panel
-        transition-all
-        duration-500
-        cursor-pointer
-      "
+      className="group relative overflow-hidden rounded-xl glass-panel transition-transform duration-300 hover:scale-105 hover:shadow-xl"
     >
       <div className="aspect-video overflow-hidden">
         <img
           src={`${imageUrl}?auto=format&fit=crop&w=800&q=80`}
           alt={title}
           loading="lazy"
-          className="
-            w-full
-            h-full
-            object-cover
-            transition-opacity
-            duration-700
-          "
+          className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90"
         />
       </div>
 
       <div className="p-6 relative z-10 flex flex-col min-h-[250px]">
         <div className="flex-grow">
-          <h3 className="text-xl font-bold mb-2 transition-colors">
+          <h3 className="text-xl font-bold mb-2 transition-colors group-hover:text-primary">
             {title}
           </h3>
           <p className="text-muted-foreground mb-4">{description}</p>
@@ -70,17 +48,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             ))}
           </div>
         </div>
-
-        {/* Same "View Project" button & modal as before */}
-        <ProjectModal
-          project={{ title, description, technologies, imageUrl, readme, githubLink }}
-        />
+        <button
+          className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-full font-medium transition-transform duration-200 hover:scale-105 active:scale-95 shadow-md"
+        >
+          View Project
+        </button>
       </div>
-
-      {/* 4) If 'isActive' is true, show a highlight overlay or some alternate effect */}
-      {isActive && (
-        <div className="absolute inset-0 bg-primary/20 pointer-events-none" />
-      )}
     </div>
   );
 };
