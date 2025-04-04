@@ -1,5 +1,7 @@
 // src/components/ProjectCard.tsx
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import ProjectModal from "./ProjectModal";
 
 interface ProjectCardProps {
   title: string;
@@ -18,9 +20,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   githubLink,
   readme,
 }) => {
+  const [isActive, setIsActive] = useState(false);
+
   return (
-    <div
-      className="group relative overflow-hidden rounded-xl glass-panel transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{
+        scale: 1.05,
+        boxShadow: "0px 10px 30px rgba(0,0,0,0.15)",
+      }}
+      onClick={() => setIsActive(!isActive)}
+      className="group relative overflow-hidden rounded-xl glass-panel transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
     >
       <div className="aspect-video overflow-hidden">
         <img
@@ -48,13 +60,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             ))}
           </div>
         </div>
-        <button
-          className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-full font-medium transition-transform duration-200 hover:scale-105 active:scale-95 shadow-md"
-        >
-          View Project
-        </button>
+
+        {/* View Project Modal */}
+        <ProjectModal
+          project={{
+            title,
+            description,
+            technologies,
+            imageUrl,
+            readme,
+            githubLink,
+          }}
+        />
       </div>
-    </div>
+
+      {/* Active Overlay */}
+      {isActive && (
+        <div className="absolute inset-0 bg-primary/20 pointer-events-none z-0" />
+      )}
+    </motion.div>
   );
 };
 

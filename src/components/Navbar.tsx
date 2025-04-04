@@ -1,6 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 import { NAV_LINKS } from '@/lib/constants';
 
@@ -25,12 +25,19 @@ const Navbar: React.FC = () => {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? 'glass-panel py-2' : 'py-4'
       }`}
     >
-      <div className="container mx-auto px-4 md:px-6">
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="container mx-auto px-4 md:px-6"
+      >
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <a href="#" className="font-bold text-xl">Home</a>
@@ -67,7 +74,7 @@ const Navbar: React.FC = () => {
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Mobile menu */}
       <div
@@ -88,7 +95,7 @@ const Navbar: React.FC = () => {
           ))}
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

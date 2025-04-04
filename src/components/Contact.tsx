@@ -3,6 +3,7 @@ import SectionTitle from './SectionTitle';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
+import { motion } from 'framer-motion';
 
 const Contact: React.FC = () => {
   const infoRef = useScrollReveal();
@@ -41,7 +42,13 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="section-container bg-secondary/50">
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      id="contact"
+      className="section-container bg-secondary/50"
+    >
       <SectionTitle title="CONTACT" subtitle="Get In Touch" />
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -142,72 +149,77 @@ const Contact: React.FC = () => {
         
         {/* Right side: Contact form */}
         <div ref={formRef}>
-          <form onSubmit={handleSubmit} className="glass-panel p-8 rounded-2xl">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  Your Name
+          <motion.form
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            onSubmit={handleSubmit}
+            className="glass-panel p-8 rounded-2xl"
+          >
+            {[
+              {
+                name: 'name',
+                label: 'Your Name',
+                type: 'text',
+                placeholder: 'John Doe',
+                value: formData.name,
+              },
+              {
+                name: 'email',
+                label: 'Your Email',
+                type: 'email',
+                placeholder: 'john@example.com',
+                value: formData.email,
+              },
+              {
+                name: 'subject',
+                label: 'Subject',
+                type: 'text',
+                placeholder: 'Project Inquiry',
+                value: formData.subject,
+              },
+              {
+                name: 'message',
+                label: 'Message',
+                type: 'textarea',
+                placeholder: 'Hello, I\'m interested in...',
+                value: formData.message,
+              },
+            ].map((field, index) => (
+              <motion.div
+                key={field.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className={field.name === 'message' ? 'mb-8' : 'mb-6'}
+              >
+                <label htmlFor={field.name} className="block text-sm font-medium mb-2">
+                  {field.label}
                 </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus-ring transition-colors"
-                  placeholder="John Doe"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus-ring transition-colors"
-                  placeholder="john@example.com"
-                />
-              </div>
-            </div>
-            
-            <div className="mb-6">
-              <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                Subject
-              </label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus-ring transition-colors"
-                placeholder="Project Inquiry"
-              />
-            </div>
-            
-            <div className="mb-8">
-              <label htmlFor="message" className="block text-sm font-medium mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={5}
-                className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus-ring transition-colors resize-none"
-                placeholder="Hello, I'm interested in..."
-              ></textarea>
-            </div>
+                {field.type === 'textarea' ? (
+                  <textarea
+                    id={field.name}
+                    name={field.name}
+                    value={field.value}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus-ring transition-colors resize-none"
+                    placeholder={field.placeholder}
+                  ></textarea>
+                ) : (
+                  <input
+                    type={field.type}
+                    id={field.name}
+                    name={field.name}
+                    value={field.value}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus-ring transition-colors"
+                    placeholder={field.placeholder}
+                  />
+                )}
+              </motion.div>
+            ))}
             
             <button
               type="submit"
@@ -229,10 +241,10 @@ const Contact: React.FC = () => {
                 </>
               )}
             </button>
-          </form>
+          </motion.form>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
