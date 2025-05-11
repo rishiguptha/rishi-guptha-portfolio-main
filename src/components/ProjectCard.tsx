@@ -61,17 +61,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </div>
 
-        {/* View Project Modal */}
-        <ProjectModal
-          project={{
-            title,
-            description,
-            technologies,
-            imageUrl,
-            readme,
-            githubLink,
-          }}
-        />
+        {/* View Project Modal - only render if readme or githubLink is present */}
+        {(readme || githubLink) && (
+          <ProjectModal
+            project={{
+              title,
+              description,
+              technologies,
+              imageUrl,
+              readme,
+              githubLink,
+            }}
+          />
+        )}
       </div>
 
       {/* Active Overlay */}

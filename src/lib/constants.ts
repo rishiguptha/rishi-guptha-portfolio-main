@@ -68,46 +68,40 @@ export const EDUCATION = [
 
 export const PROJECTS = [
   {
-    title: 'Political Sentiment Analysis',
-    description: 'Analyze political sentiment from data using Python, Pandas, Matplotlib, and TextBlob.',
-    technologies: ['Python', 'Pandas', 'Matplotlib', 'TextBlob'],
-    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
-    categories: ['Data Science']
-  },
-  {
-    title: 'Hand Written Character Recognition',
-    description: 'Develop a system for recognizing hand-written characters using deep learning.',
-    technologies: ['Python', 'Keras', 'Tensorflow', 'Pandas', 'CNN'],
-    imageUrl: 'https://images.unsplash.com/photo-1581091870624-0cf5a90aa136?auto=format&fit=crop&w=800&q=80',
-    categories: ['Machine Learning', 'Data Science']
-  },
-  {
-    title: 'Book Recommendation System',
-    description: 'A recommendation engine based on collaborative filtering and KNN.',
-    technologies: ['Python', 'KNN', 'Collaborative Filtering'],
-    imageUrl: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=800&q=80',
-    categories: ['Data Science', 'Machine Learning']
+    title: 'NutriSmart RAG',
+    description: 'A smart nutrition assistant using Retrieval-Augmented Generation.',
+    technologies: ['Python', 'NLP', 'RAG', 'Machine Learning'],
+    imageUrl: '/path/to/nutrismart-image.jpg',
+    categories: ['Machine Learning', 'Data Science', 'Artificial Intelligence'],
+    readme: 'NutriSmart RAG is a project that leverages RAG techniques to provide intelligent nutrition advice.',
+    githubLink: 'https://github.com/yourusername/nutrismart-rag'
   },
   {
     title: 'NYC Taxi Insights',
     description: 'Visualizing taxi data in NYC using cloud tools and interactive dashboards.',
     technologies: ['Google Cloud', 'Airflow', 'BigQuery', 'Looker'],
     imageUrl: 'https://images.unsplash.com/photo-1561154464-0b231e9efdd1?auto=format&fit=crop&w=800&q=80',
-    categories: ['Data Engineering', 'Data Analysis']
-  },
-  {
-    title: 'Sales Insights Dashboard',
-    description: 'An interactive dashboard for sales data built with Power BI and SQL.',
-    technologies: ['Power BI', 'SQL', 'DAX'],
-    imageUrl: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=800&q=80',
-    categories: ['Data Analysis']
+    categories: ['Data Engineering', 'Data Analysis'],
+    readme: 'This project visualizes taxi data in NYC using cloud tools and interactive dashboards.',
+    githubLink: 'https://github.com/yourusername/nyc-taxi-insights'
   },
   {
     title: 'Spotify ETL Pipeline',
     description: 'An end-to-end ETL pipeline for Spotify data using AWS services.',
     technologies: ['AWS', 'Lambda', 'Glue', 'Athena'],
     imageUrl: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=800&q=80',
-    categories: ['Data Engineering']
+    categories: ['Data Engineering'],
+    readme: 'This project is an end-to-end ETL pipeline for Spotify data using AWS services.',
+    githubLink: 'https://github.com/yourusername/spotify-etl-pipeline'
+  },
+  {
+    title: 'Sales Insights Dashboard',
+    description: 'An interactive dashboard for sales data built with Power BI and SQL.',
+    technologies: ['Power BI', 'SQL', 'DAX'],
+    imageUrl: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=800&q=80',
+    categories: ['Data Analysis'],
+    readme: 'This project is an interactive dashboard for sales data built with Power BI and SQL.',
+    githubLink: 'https://github.com/yourusername/sales-insights-dashboard'
   },
   {
     title: "Statistical Ensemble Learning R Package",
@@ -115,11 +109,9 @@ export const PROJECTS = [
     technologies: ["R", "ML Models", "Ensemble Learning"],
     imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
     categories: ["Machine Learning", "Data Science"],
-
-    // NEW FIELDS:
     readme: `
     ### Overview
-    This R package fuses the power of multiple machine learning algorithms—like Random Forests, Gradient Boosting, and Neural Networks—to produce a single, mighty “ensemble” model. The result? More reliable predictions, reduced variance, and fewer catastrophic failures compared to relying on a single algorithm alone.
+    This R package fuses the power of multiple machine learning algorithms—like Random Forests, Gradient Boosting, and Neural Networks—to produce a single, mighty "ensemble" model. The result? More reliable predictions, reduced variance, and fewer catastrophic failures compared to relying on a single algorithm alone.
 
     ### Key Features
     1. **Adaptive Weighting**: Dynamically adjusts how each model contributes to the final prediction.
@@ -151,6 +143,33 @@ export const PROJECTS = [
     Distributed under the MIT License. See \`LICENSE\` file for more details.
         `,
     githubLink: "https://github.com/YourUsername/YourRepoName"
+  },
+  {
+    title: 'Book Recommendation System',
+    description: 'A recommendation engine based on collaborative filtering and KNN.',
+    technologies: ['Python', 'KNN', 'Collaborative Filtering'],
+    imageUrl: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=800&q=80',
+    categories: ['Data Science', 'Machine Learning'],
+    readme: 'This project implements a recommendation engine based on collaborative filtering and KNN.',
+    githubLink: 'https://github.com/yourusername/book-recommendation-system'
+  },
+  {
+    title: 'Hand Written Character Recognition',
+    description: 'Develop a system for recognizing hand-written characters using deep learning.',
+    technologies: ['Python', 'Keras', 'Tensorflow', 'Pandas', 'CNN'],
+    imageUrl: 'https://images.unsplash.com/photo-1581091870624-0cf5a90aa136?auto=format&fit=crop&w=800&q=80',
+    categories: ['Machine Learning', 'Data Science'],
+    readme: 'This project develops a system for recognizing hand-written characters using deep learning.',
+    githubLink: 'https://github.com/yourusername/hand-written-character-recognition'
+  },
+  {
+    title: 'Political Sentiment Analysis',
+    description: 'Analyze political sentiment from data using Python, Pandas, Matplotlib, and TextBlob.',
+    technologies: ['Python', 'Pandas', 'Matplotlib', 'TextBlob'],
+    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+    categories: ['Data Science'],
+    readme: 'This project analyzes political sentiment from data using Python, Pandas, Matplotlib, and TextBlob.',
+    githubLink: 'https://github.com/yourusername/political-sentiment-analysis'
   },
 ];
 
