@@ -45,24 +45,28 @@ export const EXPERIENCE = [
     title: 'AI Machine Learning Engineer Intern',
     company: 'Blue AI',
     date: 'June 2025 - Present',
+    logo: '/company-logos/blue-ai.png',
     description: 'Developing a state-of-the-art AI-powered sales optimization platform that enhances coaching effectiveness through intelligent analytics and automation. Designed and implemented an innovative workflow for automated sales call auditing, enabling coaches to identify performance patterns, track key metrics, and provide data-driven feedback to sales teams. The solution leverages advanced artificial intelligence models to analyze conversation dynamics, objection handling, and closing techniques, resulting in measurable improvements in sales performance and coaching productivity.'
   },
   {
     title: 'Data Science Researcher',
     company: 'Stony Brook University',
     date: 'Jan 2025 - May 2025',
+    logo: '/company-logos/stony-brook.png',
     description: 'Built Python-SQL pipelines for S&P 500 time-series data and trained LSTM, CNN, and SVM models using TensorFlow/PyTorch, improving model accuracy by 20% and risk scoring by 15% through Bayesian inference and backtesting. Delivered dashboards (Tableau, Python) integrating predictive outputs and risk metrics, enabling 30% faster portfolio decisions and surfacing volatility trends via SVM optimization and feature extraction.'
   },
   {
     title: 'Data Engineering Intern',
     company: 'Kimberly Clark',
     date: 'Jan 2023 - July 2023',
+    logo: '/company-logos/kimberly-clark.png',
     description: 'Automated metadata tagging and validation in Collibra using Python/PostgreSQL workflows, earning 7 certifications and boosting governance team productivity by 25% while reducing manual effort by 30%. Migrated 10K+ assets into Collibra via Excel-based ETL with 100% data integrity, resolved 15% pipeline inconsistencies, and built Power BI/Tableau dashboards to visualize KPIs and reduce reporting errors by 18%. Designed and deployed 5+ advanced Collibra workflows to support real-time data quality checks and lineage validation.'
   },
   {
     title: 'Data Scientist Intern',
     company: 'Matchday AI',
     date: 'Jan 2022 - Dec 2022',
+    logo: '/company-logos/matchday-ai.png',
     description: 'Built computer vision pipelines with OpenCV and deep learning to detect field lines, ball position, and player movement from broadcast footage, achieving 90%+ event tracking accuracy. Applied Homography Transformation to convert dynamic camera feeds into 2D field projections, powering spatial analytics for tactical coaching insights. Developed a full-stack annotation platform (Flask, JS, SQLite), reducing manual labeling time by 40% and enabling deployment of data-driven dashboards for 6+ ISL teams via Star Sports.'
   },
 ];
@@ -72,12 +76,14 @@ export const EDUCATION = [
     degree: 'Master of Science in Data Science',
     institution: 'Stony Brook University - SUNY',
     date: 'Jan 2024 - Present',
+    logo: '/company-logos/stony-brook.png',
     description: 'Focused on advanced machine learning, deep learning, and statistical modeling with applications in finance and healthcare analytics.'
   },
   {
     degree: 'Bachelor of Technology in Computer Science (Data Analytics)',
     institution: 'VIT-AP University',
     date: 'June 2019 - May 2023',
+    logo: '/company-logos/vit-ap.png',
     description: 'Specialized in data analytics, machine learning, and software development with a strong foundation in computer science fundamentals.'
   },
 ];
@@ -168,7 +174,8 @@ export const CONTACT_INFO = {
   phone: '+1 (934) 263-3087',
   location: 'Stony Brook, NY, USA (Willing to relocate)',
   linkedin: 'https://linkedin.com/in/rishiguptha',
-  github: 'https://github.com/rishiguptha'
+  github: 'https://github.com/rishiguptha',
+  calendly: 'https://calendly.com/rishigupthamankala'
 };
 
 

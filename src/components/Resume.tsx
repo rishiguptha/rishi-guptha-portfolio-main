@@ -209,13 +209,38 @@ const Resume: React.FC = () => {
                   {/* Content */}
                   <div className="ml-20 modern-card group hover:scale-105 transition-all duration-300">
                     <div className="p-6">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                        <div>
-                          <h4 className="text-xl font-bold text-foreground group-hover:text-blue-500 transition-colors">
-                            {job.title}
-                          </h4>
-                          <p className="text-lg text-blue-500 font-medium">{job.company}</p>
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                        <div className="flex items-start space-x-4 flex-1">
+                          {/* Company Logo */}
+                          <motion.div
+                            className="flex-shrink-0 w-12 h-12 rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center"
+                            whileHover={{ scale: 1.1 }}
+                          >
+                            <img
+                              src={job.logo}
+                              alt={`${job.company} logo`}
+                              className="w-8 h-8 object-contain"
+                              onError={(e) => {
+                                // Fallback to first letter if logo fails to load
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = 'none';
+                                const parent = target.parentElement;
+                                if (parent) {
+                                  parent.innerHTML = `<span class="text-blue-400 font-bold text-lg">${job.company.charAt(0)}</span>`;
+                                }
+                              }}
+                            />
+                          </motion.div>
+                          
+                          {/* Job Info */}
+                          <div className="flex-1">
+                            <h4 className="text-xl font-bold text-foreground group-hover:text-blue-500 transition-colors">
+                              {job.title}
+                            </h4>
+                            <p className="text-lg text-blue-500 font-medium">{job.company}</p>
+                          </div>
                         </div>
+                        
                         <div className="flex items-center text-muted-foreground mt-2 md:mt-0">
                           <Calendar className="w-4 h-4 mr-2" />
                           <span className="text-sm">{job.date}</span>
@@ -255,14 +280,38 @@ const Resume: React.FC = () => {
               >
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h4 className="text-xl font-bold text-foreground group-hover:text-green-500 transition-colors mb-2">
-                        {edu.degree}
-                      </h4>
-                      <p className="text-green-500 font-medium mb-2">{edu.institution}</p>
-                      <div className="flex items-center text-muted-foreground mb-3">
-                        <Calendar className="w-4 h-4 mr-2" />
-                        <span className="text-sm">{edu.date}</span>
+                    <div className="flex items-start space-x-4 flex-1">
+                      {/* University Logo */}
+                      <motion.div
+                        className="flex-shrink-0 w-12 h-12 rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <img
+                          src={edu.logo}
+                          alt={`${edu.institution} logo`}
+                          className="w-8 h-8 object-contain"
+                          onError={(e) => {
+                            // Fallback to graduation cap if logo fails to load
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent) {
+                              parent.innerHTML = `<svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>`;
+                            }
+                          }}
+                        />
+                      </motion.div>
+                      
+                      {/* Education Info */}
+                      <div className="flex-1">
+                        <h4 className="text-xl font-bold text-foreground group-hover:text-green-500 transition-colors mb-2">
+                          {edu.degree}
+                        </h4>
+                        <p className="text-green-500 font-medium mb-2">{edu.institution}</p>
+                        <div className="flex items-center text-muted-foreground mb-3">
+                          <Calendar className="w-4 h-4 mr-2" />
+                          <span className="text-sm">{edu.date}</span>
+                        </div>
                       </div>
                     </div>
                     <motion.div
@@ -277,35 +326,6 @@ const Resume: React.FC = () => {
               </motion.div>
             ))}
           </div>
-        </motion.div>
-
-
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <motion.div
-            className="inline-block p-8 rounded-2xl bg-gradient-to-r from-blue-600/10 to-purple-600/10 border border-blue-500/20"
-            whileHover={{ scale: 1.02 }}
-          >
-            <h4 className="text-2xl font-bold text-foreground mb-4">Ready to Collaborate?</h4>
-            <p className="text-foreground/80 mb-6 max-w-2xl">
-              I'm always interested in discussing new opportunities, innovative projects, and ways to leverage data science for meaningful impact.
-            </p>
-            <motion.a
-              href="#contact"
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Let's Connect
-            </motion.a>
-          </motion.div>
         </motion.div>
       </div>
     </section>

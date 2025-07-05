@@ -362,7 +362,9 @@ const Contact: React.FC = () => {
               Sometimes a conversation is worth a thousand emails. Let's schedule a quick call to discuss your project.
             </p>
             <motion.a
-              href={`mailto:${CONTACT_INFO.email}?subject=Let's Schedule a Call`}
+              href={CONTACT_INFO.calendly}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-gradient px-8 py-4 rounded-full font-semibold text-lg inline-flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
