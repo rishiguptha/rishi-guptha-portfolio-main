@@ -75,7 +75,7 @@ export const PROJECTS = [
     title: 'NutriSmart RAG',
     description: 'A smart nutrition assistant using Retrieval-Augmented Generation.',
     technologies: ['Python', 'NLP', 'RAG', 'Machine Learning'],
-    imageUrl: '/path/to/nutrismart-image.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=800&q=80',
     categories: ['Machine Learning', 'Data Science', 'Artificial Intelligence'],
     readme: 'NutriSmart RAG is a project that leverages RAG techniques to provide intelligent nutrition advice.',
     githubLink: 'https://github.com/rishiguptha/nutismart_rag_project'
@@ -84,7 +84,7 @@ export const PROJECTS = [
     title: 'NYC Taxi Insights',
     description: 'Visualizing taxi data in NYC using cloud tools and interactive dashboards.',
     technologies: ['Google Cloud', 'Airflow', 'BigQuery', 'Looker'],
-    imageUrl: 'https://images.unsplash.com/photo-1561154464-0b231e9efdd1?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/projects/nyc-taxi.jpg',
     categories: ['Data Engineering', 'Data Analysis'],
     readme: 'This project visualizes taxi data in NYC using cloud tools and interactive dashboards.',
     githubLink: 'https://github.com/rishiguptha/Nycab-insights-project.git'
@@ -93,7 +93,7 @@ export const PROJECTS = [
     title: 'Spotify ETL Pipeline',
     description: 'An end-to-end ETL pipeline for Spotify data using AWS services.',
     technologies: ['AWS', 'Lambda', 'Glue', 'Athena'],
-    imageUrl: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1611339555312-e607c8352fd7?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Engineering'],
     readme: 'This project is an end-to-end ETL pipeline for Spotify data using AWS services.',
     //githubLink: 'https://github.com/yourusername/spotify-etl-pipeline'
@@ -102,7 +102,7 @@ export const PROJECTS = [
     title: 'Sales Insights Dashboard',
     description: 'An interactive dashboard for sales data built with Power BI and SQL.',
     technologies: ['Power BI', 'SQL', 'DAX'],
-    imageUrl: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Analysis'],
     readme: 'This project is an interactive dashboard for sales data built with Power BI and SQL.',
     // githubLink: 'https://github.com/yourusername/sales-insights-dashboard'
@@ -111,7 +111,7 @@ export const PROJECTS = [
     title: "Statistical Ensemble Learning R Package",
     description: "An R package for statistical ensemble methods in machine learning.",
     technologies: ["R", "ML Models", "Ensemble Learning"],
-    imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
+    imageUrl: '/projects/R.jpg',
     categories: ["Machine Learning", "Data Science"],
     readme: 'This project implements statistical ensemble methods in machine learning.',
     // githubLink: 'https://github.com/rishiguptha/Statistical-Ensemble-Learning-R-Package'
@@ -120,7 +120,7 @@ export const PROJECTS = [
     title: 'Book Recommendation System',
     description: 'A recommendation engine based on collaborative filtering and KNN.',
     technologies: ['Python', 'KNN', 'Collaborative Filtering'],
-    imageUrl: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1550399105-c4db5fb85c18?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Science', 'Machine Learning'],
     readme: 'This project implements a recommendation engine based on collaborative filtering and KNN.',
     githubLink: 'https://github.com/rishiguptha/BooksRecommendation_using_CF'
@@ -129,7 +129,7 @@ export const PROJECTS = [
     title: 'Hand Written Character Recognition',
     description: 'Develop a system for recognizing hand-written characters using deep learning.',
     technologies: ['Python', 'Keras', 'Tensorflow', 'Pandas', 'CNN'],
-    imageUrl: 'https://images.unsplash.com/photo-1581091870624-0cf5a90aa136?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/projects/hand-written.jpg',
     categories: ['Machine Learning', 'Data Science'],
     readme: 'This project develops a system for recognizing hand-written characters using deep learning.',
     githubLink: 'https://github.com/rishiguptha/Hand-Written-Character-Recognition'
@@ -138,7 +138,7 @@ export const PROJECTS = [
     title: 'Political Sentiment Analysis',
     description: 'Analyze political sentiment from data using Python, Pandas, Matplotlib, and TextBlob.',
     technologies: ['Python', 'Pandas', 'Matplotlib', 'TextBlob'],
-    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Science'],
     readme: 'This project analyzes political sentiment from data using Python, Pandas, Matplotlib, and TextBlob.',
     githubLink: 'https://github.com/rishiguptha/PoliticalSentimentAnalysis'
