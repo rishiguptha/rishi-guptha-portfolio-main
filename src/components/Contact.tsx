@@ -1,44 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import SectionTitle from './SectionTitle';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
 import { CONTACT_INFO } from '@/lib/constants';
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 
 const Contact: React.FC = () => {
   const infoRef = useScrollReveal();
   const formRef = useScrollReveal();
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
+  const form = useRef<HTMLFormElement>(null);
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-  
-  const handleSubmit = (e: React.FormEvent) => {
+  const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
+
+    if (!form.current) {
       setIsSubmitting(false);
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
-      alert('Thank you for your message! I will get back to you soon.');
-    }, 1500);
+      toast.error('An error occurred. Please try again.');
+      return;
+    }
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("EmailJS environment variables are not set.");
+      toast.error('Configuration error. Please contact the administrator.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    emailjs
+      .sendForm(serviceId, templateId, form.current, {
+        publicKey: publicKey,
+      })
+      .then(
+        () => {
+          setIsSubmitting(false);
+          toast.success('Thank you for your message! I will get back to you soon.');
+          form.current?.reset();
+        },
+        (error) => {
+          setIsSubmitting(false);
+          toast.error('Failed to send message. Please try again.');
+          console.log('FAILED...', error.text);
+        },
+      );
   };
 
   return (
@@ -150,9 +162,10 @@ const Contact: React.FC = () => {
         {/* Right side: Contact form */}
         <div ref={formRef}>
           <motion.form
+            ref={form}
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2 }}
-            onSubmit={handleSubmit}
+            onSubmit={sendEmail}
             className="glass-panel p-8 rounded-2xl"
           >
             {[
@@ -161,28 +174,24 @@ const Contact: React.FC = () => {
                 label: 'Your Name',
                 type: 'text',
                 placeholder: 'John Doe',
-                value: formData.name,
               },
               {
                 name: 'email',
                 label: 'Your Email',
                 type: 'email',
                 placeholder: 'john@example.com',
-                value: formData.email,
               },
               {
                 name: 'subject',
                 label: 'Subject',
                 type: 'text',
                 placeholder: 'Project Inquiry',
-                value: formData.subject,
               },
               {
                 name: 'message',
                 label: 'Message',
                 type: 'textarea',
-                placeholder: 'Hello, I\'m interested in...',
-                value: formData.message,
+                placeholder: "Hello, I'm interested in...",
               },
             ].map((field, index) => (
               <motion.div
@@ -199,8 +208,6 @@ const Contact: React.FC = () => {
                   <textarea
                     id={field.name}
                     name={field.name}
-                    value={field.value}
-                    onChange={handleChange}
                     required
                     rows={5}
                     className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus-ring transition-colors resize-none"
@@ -211,8 +218,6 @@ const Contact: React.FC = () => {
                     type={field.type}
                     id={field.name}
                     name={field.name}
-                    value={field.value}
-                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus-ring transition-colors"
                     placeholder={field.placeholder}
