@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SectionTitle from './SectionTitle';
 import { EXPERIENCE, EDUCATION, RESUME_URL } from '@/lib/constants';
-import { Briefcase, GraduationCap, Download } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Briefcase, GraduationCap, Download, Award, MapPin, Calendar, Building, CheckCircle } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -20,7 +20,7 @@ const itemVariants = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.6,
       ease: 'easeOut',
     },
   },
@@ -33,108 +33,279 @@ const TimelineItem: React.FC<{
   subtitle: string;
   description?: string;
   isLast?: boolean;
-}> = ({ icon, date, title, subtitle, description, isLast }) => {
+  index: number;
+}> = ({ icon, date, title, subtitle, description, isLast, index }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
     <motion.div 
-      className="relative pl-12"
+      ref={ref}
+      className="relative pl-12 group"
       variants={itemVariants}
-      whileHover={{
-        boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-        borderColor: "hsl(var(--primary))"
-      }}
+      initial={{ opacity: 0, x: -50 }}
+      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+      transition={{ duration: 0.6, delay: index * 0.2 }}
     >
-      <div className="absolute left-0 top-1 flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground">
-        {icon}
-      </div>
+      {/* Timeline connector */}
       {!isLast && (
-        <div className="absolute left-4 top-10 w-px h-full bg-border -translate-x-1/2"></div>
+        <motion.div 
+          className="absolute left-4 top-12 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-border -translate-x-1/2"
+          initial={{ height: 0 }}
+          animate={isInView ? { height: "calc(100% - 3rem)" } : { height: 0 }}
+          transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
+        />
       )}
-      <div className="flex-grow pb-12">
-        <p className="text-sm font-medium text-primary mb-1">{date}</p>
-        <h3 className="text-xl font-bold">{title}</h3>
-        <p className="text-md text-muted-foreground mb-3">{subtitle}</p>
+      
+      {/* Icon container */}
+      <motion.div 
+        className="absolute left-0 top-0 flex items-center justify-center w-8 h-8 rounded-full bg-gradient-primary text-white shadow-lg group-hover:scale-110 transition-transform duration-300"
+        initial={{ scale: 0, rotate: -180 }}
+        animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
+        transition={{ 
+          duration: 0.5, 
+          delay: index * 0.2 + 0.1,
+          type: "spring",
+          bounce: 0.5
+        }}
+      >
+        {icon}
+      </motion.div>
+
+      {/* Content card */}
+      <motion.div 
+        className="modern-card mb-8 group-hover:shadow-xl transition-all duration-300"
+        whileHover={{ 
+          y: -5,
+          boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
+        }}
+      >
+        {/* Date badge */}
+        <motion.div 
+          className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-3"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.4, delay: index * 0.2 + 0.4 }}
+        >
+          <Calendar className="w-3 h-3" />
+          {date}
+        </motion.div>
+
+        {/* Title and company */}
+        <motion.h3 
+          className="text-xl font-bold text-gradient mb-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: index * 0.2 + 0.5 }}
+        >
+          {title}
+        </motion.h3>
+        
+        <motion.div 
+          className="flex items-center gap-2 text-muted-foreground mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: index * 0.2 + 0.6 }}
+        >
+          <MapPin className="w-4 h-4" />
+          <span className="font-medium">{subtitle}</span>
+        </motion.div>
+
         {description && (
-          <p className="text-muted-foreground">{description}</p>
+          <motion.p 
+            className="text-muted-foreground leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.5, delay: index * 0.2 + 0.7 }}
+          >
+            {description}
+          </motion.p>
         )}
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
 
 const Resume: React.FC = () => {
+  const experienceRef = useRef(null);
+  const educationRef = useRef(null);
+  const isExperienceInView = useInView(experienceRef, { once: true, margin: "-100px" });
+  const isEducationInView = useInView(educationRef, { once: true, margin: "-100px" });
+
+  const achievements = [
+    { icon: <Award className="w-5 h-5" />, title: "Data Science Excellence", value: "Top 10%" },
+    { icon: <Briefcase className="w-5 h-5" />, title: "Project Success Rate", value: "95%" },
+    { icon: <GraduationCap className="w-5 h-5" />, title: "Academic Performance", value: "3.8 GPA" },
+  ];
+
   return (
-    <section id="resume" className="section-container">
-      <div className="container mx-auto px-4">
-        <SectionTitle title="MY RESUME" subtitle="Education & Experience" />
+    <section id="resume" className="py-20 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-gradient-to-tr from-blue-500/20 to-green-500/20 rounded-full blur-3xl animate-pulse" />
+      </div>
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          {/* Experience Column */}
-          <div>
-            <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
-              <Briefcase size={28} className="text-primary" />
-              Experience
-            </h2>
-            <div className="relative">
-              {EXPERIENCE.map((item, index) => (
-                <TimelineItem
-                  key={item.title}
-                  icon={<Briefcase size={16} />}
-                  date={item.date}
-                  title={item.title}
-                  subtitle={item.company}
-                  description={item.description}
-                  isLast={index === EXPERIENCE.length - 1}
-                />
-              ))}
-            </div>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-blue-400 to-green-400 bg-clip-text text-transparent">
+            Resume
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            My professional journey in data science and machine learning
+          </p>
+          
+          <motion.a
+            href={RESUME_URL}
+            download
+            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl group"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+            Download Resume
+          </motion.a>
+        </motion.div>
 
-          {/* Education Column */}
-          <div>
-            <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
-              <GraduationCap size={28} className="text-primary" />
-              Education
-            </h2>
-            <div className="relative">
-              {EDUCATION.map((item, index) => (
-                <TimelineItem
-                  key={item.degree}
-                  icon={<GraduationCap size={16} />}
-                  date={item.date}
-                  title={item.degree}
-                  subtitle={item.institution}
-                  description={item.description}
-                  isLast={index === EDUCATION.length - 1}
-                />
+        {/* Work Experience */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <h3 className="text-3xl font-bold text-center mb-12 text-gradient flex items-center justify-center">
+            <Building className="w-8 h-8 mr-3 text-blue-400" />
+            Work Experience
+          </h3>
+          
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+            
+            <div className="space-y-12">
+              {EXPERIENCE.map((job, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative flex items-start"
+                >
+                  {/* Timeline Dot */}
+                  <motion.div
+                    className="absolute left-6 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-4 border-gray-900"
+                    whileHover={{ scale: 1.2 }}
+                  ></motion.div>
+                  
+                  {/* Content */}
+                  <div className="ml-20 modern-card group hover:scale-105 transition-all duration-300">
+                    <div className="p-6">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                        <div>
+                          <h4 className="text-xl font-bold text-foreground group-hover:text-blue-500 transition-colors">
+                            {job.title}
+                          </h4>
+                          <p className="text-lg text-blue-500 font-medium">{job.company}</p>
+                        </div>
+                        <div className="flex items-center text-muted-foreground mt-2 md:mt-0">
+                          <Calendar className="w-4 h-4 mr-2" />
+                          <span className="text-sm">{job.date}</span>
+                        </div>
+                      </div>
+                      <p className="text-foreground/80 leading-relaxed">{job.description}</p>
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </motion.div>
-        
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 50 }}
+
+        {/* Education */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-20"
         >
-          <motion.a
-            href={RESUME_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-full font-bold text-lg hover:bg-primary/90 transition-all"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
+          <h3 className="text-3xl font-bold text-center mb-12 text-gradient flex items-center justify-center">
+            <GraduationCap className="w-8 h-8 mr-3 text-green-400" />
+            Education
+          </h3>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {EDUCATION.map((edu, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="modern-card group hover:scale-105 transition-all duration-300"
+              >
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <h4 className="text-xl font-bold text-foreground group-hover:text-green-500 transition-colors mb-2">
+                        {edu.degree}
+                      </h4>
+                      <p className="text-green-500 font-medium mb-2">{edu.institution}</p>
+                      <div className="flex items-center text-muted-foreground mb-3">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        <span className="text-sm">{edu.date}</span>
+                      </div>
+                    </div>
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      className="p-3 rounded-xl bg-gradient-to-br from-green-600/20 to-blue-600/20 border border-green-500/30"
+                    >
+                      <GraduationCap className="w-6 h-6 text-green-500" />
+                    </motion.div>
+                  </div>
+                  <p className="text-foreground/80 text-sm leading-relaxed">{edu.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+
+
+        {/* Call to Action */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <motion.div
+            className="inline-block p-8 rounded-2xl bg-gradient-to-r from-blue-600/10 to-purple-600/10 border border-blue-500/20"
+            whileHover={{ scale: 1.02 }}
           >
-            <Download size={20} />
-            Download My Resume
-          </motion.a>
+            <h4 className="text-2xl font-bold text-foreground mb-4">Ready to Collaborate?</h4>
+            <p className="text-foreground/80 mb-6 max-w-2xl">
+              I'm always interested in discussing new opportunities, innovative projects, and ways to leverage data science for meaningful impact.
+            </p>
+            <motion.a
+              href="#contact"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Let's Connect
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
     </section>
