@@ -30,6 +30,12 @@ export const SKILLS = [
 
 export const EXPERIENCE = [
   {
+    title: 'AI Machine Learning Engineer Intern',
+    company: 'Blue AI',
+    date: 'June 2025 - Present',
+    // description: 'Data Science & Model Optimization: Engineered a full data pipeline with feature engineering to boost predictive accuracy by 20% for S&P asset performance, developed deep learning models and optimized classifiers to enhance risk metrics and reduce errors, and delivered interactive visualizations that improved stakeholder decision-making by 30%.'
+  },
+  {
     title: 'Data Science Researcher',
     company: 'Stony Brook University',
     date: 'Jan 2025 - Present',
@@ -56,8 +62,6 @@ export const EDUCATION = [
     degree: 'Master in Data Science',
     institution: 'Stony Brook University - SUNY',
     date: 'Jan 2024 - Present',
-    description:
-      'Data Governance & Automation: Leveraged 7 Collibra certifications to automate metadata tagging and design efficient Python/PostgreSQL workflows, leading large-scale data migrations with 100% integrity, optimizing data quality, and creating interactive Power BI dashboards for real-time governance insights.',
   },
   {
     degree: 'Bachelor of Technology in Computer Science (Data Analytics)',
@@ -74,7 +78,7 @@ export const PROJECTS = [
     imageUrl: '/path/to/nutrismart-image.jpg',
     categories: ['Machine Learning', 'Data Science', 'Artificial Intelligence'],
     readme: 'NutriSmart RAG is a project that leverages RAG techniques to provide intelligent nutrition advice.',
-    githubLink: 'https://github.com/yourusername/nutrismart-rag'
+    githubLink: 'https://github.com/rishiguptha/nutismart_rag_project'
   },
   {
     title: 'NYC Taxi Insights',
@@ -83,7 +87,7 @@ export const PROJECTS = [
     imageUrl: 'https://images.unsplash.com/photo-1561154464-0b231e9efdd1?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Engineering', 'Data Analysis'],
     readme: 'This project visualizes taxi data in NYC using cloud tools and interactive dashboards.',
-    githubLink: 'https://github.com/yourusername/nyc-taxi-insights'
+    githubLink: 'https://github.com/rishiguptha/Nycab-insights-project.git'
   },
   {
     title: 'Spotify ETL Pipeline',
@@ -92,7 +96,7 @@ export const PROJECTS = [
     imageUrl: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Engineering'],
     readme: 'This project is an end-to-end ETL pipeline for Spotify data using AWS services.',
-    githubLink: 'https://github.com/yourusername/spotify-etl-pipeline'
+    //githubLink: 'https://github.com/yourusername/spotify-etl-pipeline'
   },
   {
     title: 'Sales Insights Dashboard',
@@ -101,7 +105,7 @@ export const PROJECTS = [
     imageUrl: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Analysis'],
     readme: 'This project is an interactive dashboard for sales data built with Power BI and SQL.',
-    githubLink: 'https://github.com/yourusername/sales-insights-dashboard'
+    // githubLink: 'https://github.com/yourusername/sales-insights-dashboard'
   },
   {
     title: "Statistical Ensemble Learning R Package",
@@ -109,40 +113,8 @@ export const PROJECTS = [
     technologies: ["R", "ML Models", "Ensemble Learning"],
     imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
     categories: ["Machine Learning", "Data Science"],
-    readme: `
-    ### Overview
-    This R package fuses the power of multiple machine learning algorithms—like Random Forests, Gradient Boosting, and Neural Networks—to produce a single, mighty "ensemble" model. The result? More reliable predictions, reduced variance, and fewer catastrophic failures compared to relying on a single algorithm alone.
-
-    ### Key Features
-    1. **Adaptive Weighting**: Dynamically adjusts how each model contributes to the final prediction.
-    2. **Built-In Metrics**: Evaluates performance using multiple scoring metrics, including accuracy, precision, recall, and AUC.
-    3. **Easy Customization**: Plug-and-play architecture for swapping out underlying ML algorithms with minimal configuration.
-    4. **Parallel Execution**: Harnesses multi-core processing in R to speed up model training on large datasets.
-
-    ### Installation
-    \`\`\`r
-    # Install devtools if you haven't already
-    install.packages("devtools")
-
-    # Then install the package directly from GitHub
-    devtools::install_github("YourUsername/YourRepoName")
-    \`\`\`
-
-    ### Getting Started
-    \`\`\`r
-    # Load the library
-    library(ensembleR)
-
-    # Example usage
-    data(iris)
-    model <- ensemble_fit(iris[,1:4], iris$Species)
-    predictions <- ensemble_predict(model, iris[,1:4])
-    \`\`\`
-
-    ### License
-    Distributed under the MIT License. See \`LICENSE\` file for more details.
-        `,
-    githubLink: "https://github.com/YourUsername/YourRepoName"
+    readme: 'This project implements statistical ensemble methods in machine learning.',
+    // githubLink: 'https://github.com/rishiguptha/Statistical-Ensemble-Learning-R-Package'
   },
   {
     title: 'Book Recommendation System',
@@ -151,7 +123,7 @@ export const PROJECTS = [
     imageUrl: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Science', 'Machine Learning'],
     readme: 'This project implements a recommendation engine based on collaborative filtering and KNN.',
-    githubLink: 'https://github.com/yourusername/book-recommendation-system'
+    githubLink: 'https://github.com/rishiguptha/BooksRecommendation_using_CF'
   },
   {
     title: 'Hand Written Character Recognition',
@@ -160,7 +132,7 @@ export const PROJECTS = [
     imageUrl: 'https://images.unsplash.com/photo-1581091870624-0cf5a90aa136?auto=format&fit=crop&w=800&q=80',
     categories: ['Machine Learning', 'Data Science'],
     readme: 'This project develops a system for recognizing hand-written characters using deep learning.',
-    githubLink: 'https://github.com/yourusername/hand-written-character-recognition'
+    githubLink: 'https://github.com/rishiguptha/Hand-Written-Character-Recognition'
   },
   {
     title: 'Political Sentiment Analysis',
@@ -169,7 +141,7 @@ export const PROJECTS = [
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Science'],
     readme: 'This project analyzes political sentiment from data using Python, Pandas, Matplotlib, and TextBlob.',
-    githubLink: 'https://github.com/yourusername/political-sentiment-analysis'
+    githubLink: 'https://github.com/rishiguptha/PoliticalSentimentAnalysis'
   },
 ];
 

@@ -1,101 +1,96 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { motion } from 'framer-motion';
-import ThemeToggle from './ThemeToggle';
+import { Moon, Sun, Menu, X } from 'lucide-react';
+import { useTheme } from '@/hooks/useTheme';
 import { NAV_LINKS } from '@/lib/constants';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
+  const navClass = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    isScrolled ? 'bg-background/80 backdrop-blur-lg border-b border-border' : 'bg-transparent'
+  }`;
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass-panel py-2' : 'py-4'
-      }`}
-    >
-      <motion.div
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="container mx-auto px-4 md:px-6"
-      >
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <a href="#" className="font-bold text-xl">Home</a>
+    <nav className={navClass}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          <a href="#" className="text-2xl font-bold text-primary">
+            Rishi.
+          </a>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center space-x-8">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="font-medium text-foreground/80 hover:text-primary transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          <div className="hidden md:flex items-center space-x-4">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full hover:bg-secondary"
+            >
+              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
           </div>
           
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-8">
+          {/* Mobile Nav Button */}
+          <div className="md:hidden">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2">
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-background/90 backdrop-blur-lg"
+          >
+            <div className="flex flex-col items-center space-y-4 py-4 border-t border-border">
               {NAV_LINKS.map((link) => (
                 <a
-                  key={link.name}
+                  key={link.href}
                   href={link.href}
-                  className="link-underline font-medium hover:text-primary transition-colors"
+                  className="font-medium text-lg text-foreground/80 hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
                 </a>
               ))}
-              <ThemeToggle />
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full hover:bg-secondary mt-4"
+              >
+                {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
+              </button>
             </div>
-          </div>
-          
-          <div className="flex md:hidden items-center space-x-4">
-            <ThemeToggle />
-            <button
-              onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:bg-secondary focus-ring"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Mobile menu */}
-      <div
-        className={`md:hidden transform ${
-          isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-        } transition-all duration-300 ease-in-out fixed inset-0 top-16 bg-background glass-panel`}
-      >
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="block px-3 py-4 rounded-md text-base font-medium hover:bg-secondary transition-colors"
-              onClick={closeMenu}
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
-      </div>
-    </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 

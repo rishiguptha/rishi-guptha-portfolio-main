@@ -1,69 +1,87 @@
-import React, { useState } from 'react';
-import ProjectCard from './ProjectCard';
+import React, { useState, useMemo } from 'react';
 import SectionTitle from './SectionTitle';
-import { useScrollReveal } from '@/hooks/useScrollReveal';
+import ProjectCard from './ProjectCard';
 import { PROJECTS } from '@/lib/constants';
+import { motion } from 'framer-motion';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut',
+    },
+  },
+};
 
 const Projects: React.FC = () => {
-  const projectsRef = useScrollReveal();
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  
-  // Get unique categories
-  const categories = Array.from(
-    new Set(PROJECTS.flatMap(project => project.categories))
-  );
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const filteredProjects = selectedCategory === 'all' 
-    ? PROJECTS 
-    : PROJECTS.filter(project => 
-        project.categories.includes(selectedCategory)
-      );
+  const categories = useMemo(() => {
+    const allCategories = PROJECTS.flatMap(p => p.categories);
+    return ['All', ...Array.from(new Set(allCategories))];
+  }, []);
+
+  const filteredProjects = useMemo(() => {
+    if (selectedCategory === 'All') {
+      return PROJECTS;
+    }
+    return PROJECTS.filter(p => p.categories.includes(selectedCategory));
+  }, [selectedCategory]);
 
   return (
-    <section id="projects" className="section-container">
-      <div className="flex flex-col items-center mb-12">
-      <SectionTitle title="PROJECTS" subtitle="My Recent Work" />
-        
+    <section id="projects" className="section-container bg-secondary/50">
+      <div className="container mx-auto px-4">
+        <SectionTitle title="MY PROJECTS" subtitle="A Selection of My Work" />
+
         {/* Category Filters */}
-        <div className="flex flex-wrap gap-2 mb-8 justify-center">
-          <button
-            onClick={() => setSelectedCategory('all')}
-            className={`px-4 py-2 rounded-full transition-colors ${
-              selectedCategory === 'all'
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-secondary text-secondary-foreground hover:bg-primary/20'
-            }`}
-          >
-            All
-          </button>
-          
-          {categories.map(category => (
-            <button
+        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
+          {categories.map((category) => (
+            <motion.button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full transition-colors ${
+              className={`px-4 py-2 rounded-full font-medium text-sm transition-colors ${
                 selectedCategory === category
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-secondary text-secondary-foreground hover:bg-primary/20'
+                  : 'bg-background text-foreground hover:bg-primary/10'
               }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               {category}
-            </button>
+            </motion.button>
           ))}
         </div>
 
-        {/* Projects Grid */}
-        <div ref={projectsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
-            <div 
-              key={index} 
-              className="opacity-0 animate-fade-in-up" 
-              style={{ animationDelay: `${index * 200}ms` }}
+        {/* Project Cards */}
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {filteredProjects.map((project) => (
+            <motion.div
+              key={project.title}
+              variants={itemVariants}
             >
-              <ProjectCard {...project} />
-            </div>
+              <ProjectCard project={project} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

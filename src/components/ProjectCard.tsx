@@ -1,85 +1,73 @@
 // src/components/ProjectCard.tsx
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import ProjectModal from "./ProjectModal";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink, Github } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 interface ProjectCardProps {
-  title: string;
-  description: string;
-  technologies: string[];
-  imageUrl: string;
-  githubLink: string;
-  readme: string;
+  project: {
+    title: string;
+    description: string;
+    technologies: string[];
+    imageUrl: string;
+    githubLink?: string;
+    liveLink?: string;
+  };
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({
-  title,
-  description,
-  technologies,
-  imageUrl,
-  githubLink,
-  readme,
-}) => {
-  const [isActive, setIsActive] = useState(false);
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const { title, description, technologies, imageUrl, githubLink, liveLink } = project;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      whileHover={{
-        scale: 1.05,
-        boxShadow: "0px 10px 30px rgba(0,0,0,0.15)",
-      }}
-      onClick={() => setIsActive(!isActive)}
-      className="group relative overflow-hidden rounded-xl glass-panel transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
+    <motion.div 
+      className="bg-card rounded-lg overflow-hidden border border-border h-full flex flex-col group"
+      whileHover={{ y: -5, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" }}
+      transition={{ duration: 0.3 }}
     >
-      <div className="aspect-video overflow-hidden">
-        <img
-          src={`${imageUrl}?auto=format&fit=crop&w=800&q=80`}
-          alt={title}
-          loading="lazy"
-          className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90"
+      <div className="relative h-48 w-full overflow-hidden">
+        <img 
+          src={imageUrl || '/placeholder.svg'} 
+          alt={title} 
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
         />
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300" />
       </div>
 
-      <div className="p-6 relative z-10 flex flex-col min-h-[250px]">
-        <div className="flex-grow">
-          <h3 className="text-xl font-bold mb-2 transition-colors group-hover:text-primary">
-            {title}
-          </h3>
-          <p className="text-muted-foreground mb-4">{description}</p>
-          <div className="flex flex-wrap gap-2">
-            {technologies.map((tech) => (
-              <span
-                key={tech}
-                className="px-2 py-1 rounded-md text-xs font-medium bg-secondary text-secondary-foreground"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
+      <div className="p-6 flex-grow flex flex-col">
+        <h3 className="text-xl font-bold mb-2">{title}</h3>
+        <p className="text-muted-foreground text-sm mb-4 flex-grow">{description}</p>
+        
+        <div className="flex flex-wrap gap-2 mb-4">
+          {technologies.slice(0, 4).map((tech) => (
+            <Badge key={tech} variant="secondary">{tech}</Badge>
+          ))}
         </div>
 
-        {/* View Project Modal - only render if readme or githubLink is present */}
-        {(readme || githubLink) && (
-          <ProjectModal
-            project={{
-              title,
-              description,
-              technologies,
-              imageUrl,
-              readme,
-              githubLink,
-            }}
-          />
-        )}
+        <div className="flex items-center justify-end space-x-4 mt-auto pt-4 border-t border-border">
+          {githubLink && (
+            <a
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+              aria-label={`GitHub for ${title}`}
+            >
+              <Github size={20} />
+            </a>
+          )}
+          {liveLink && (
+            <a
+              href={liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+              aria-label={`Live link for ${title}`}
+            >
+              <ExternalLink size={20} />
+            </a>
+          )}
+        </div>
       </div>
-
-      {/* Active Overlay */}
-      {isActive && (
-        <div className="absolute inset-0 bg-primary/20 pointer-events-none z-0" />
-      )}
     </motion.div>
   );
 };

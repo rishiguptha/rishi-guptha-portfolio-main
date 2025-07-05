@@ -1,77 +1,85 @@
 import React from 'react';
 import SectionTitle from './SectionTitle';
-import ProfileImage from './ProfileImage';
-import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { SKILLS } from '@/lib/constants';
 import { motion } from 'framer-motion';
+import ProfileImage from './ProfileImage';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
 
 const About: React.FC = () => {
-  const contentRef = useScrollReveal();
-  const skillsRef = useScrollReveal();
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0 }
-  };
-
   return (
     <motion.section
       id="about"
       className="section-container"
-      variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.2 }}
+      variants={containerVariants}
     >
-      <motion.h2 variants={itemVariants}>
-        <SectionTitle title="ABOUT ME" subtitle="My Introduction" />
-      </motion.h2>
+      <div className="container mx-auto px-4">
+        <SectionTitle title="ABOUT ME" subtitle="A Glimpse Into My World" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <motion.div className="order-2 md:order-1" ref={contentRef} variants={itemVariants}>
-          <h3 className="text-2xl font-bold mb-4">Data Science Grad Student at Stony Brook University</h3>
-          <p className="text-muted-foreground mb-6">
-            I am a Data Science graduate student at Stony Brook University, with a strong foundation in computer science and data analytics. I enjoy solving complex problems and turning data into actionable insights.
-          </p>
-          <p className="text-muted-foreground mb-6">
-            My goal is to leverage my technical skills and experience to contribute to innovative projects and help organizations make data-driven decisions. I have worked on various projects ranging from political sentiment analysis to book recommendation systems, showcasing my ability to handle diverse data science tasks.
-          </p>
-
-          <motion.div className="mb-8" ref={skillsRef} variants={itemVariants}>
-            <h4 className="text-lg font-medium mb-3">Skills</h4>
-            <div className="flex flex-wrap gap-2">
-              {SKILLS.map((skill) => (
-                <span
-                  key={skill}
-                  className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.a
-            href="#contact"
-            className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-full font-medium transition-transform duration-200 hover:scale-105 active:scale-95 focus-ring"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+          {/* Left Column: Profile Image */}
+          <motion.div 
+            className="md:col-span-1 flex justify-center"
             variants={itemVariants}
           >
-            Let's Talk
-          </motion.a>
-        </motion.div>
-        <motion.div className="order-1 md:order-2 flex justify-center animate-float" variants={itemVariants}>
-          <ProfileImage />
-        </motion.div>
+            <ProfileImage />
+          </motion.div>
+
+          {/* Right Column: Bio and Skills */}
+          <div className="md:col-span-2">
+            <motion.div variants={containerVariants}>
+              <motion.h3 variants={itemVariants} className="text-3xl font-bold mb-4">
+                Data Scientist & Engineer
+              </motion.h3>
+              <motion.p variants={itemVariants} className="text-lg text-muted-foreground mb-6">
+                I'm a graduate student at Stony Brook University with a passion for uncovering stories hidden within data. My goal is to leverage my technical skills to build intelligent systems that solve real-world problems and drive impactful decisions.
+              </motion.p>
+              <motion.p variants={itemVariants} className="text-lg text-muted-foreground mb-8">
+                When I'm not wrangling data, you can find me exploring new technologies or enjoying a good book. Feel free to reach out—I'm always open to new challenges and collaborations.
+              </motion.p>
+            </motion.div>
+            
+            <motion.div variants={containerVariants}>
+              <motion.h4 variants={itemVariants} className="text-2xl font-bold mb-4">Core Skills</motion.h4>
+              <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
+                {SKILLS.slice(0, 12).map((skill) => (
+                  <motion.span
+                    key={skill}
+                    className="px-4 py-2 bg-secondary text-secondary-foreground rounded-full font-medium text-sm"
+                    whileHover={{ y: -3 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </motion.section>
   );

@@ -5,9 +5,7 @@ import Resume from '@/components/Resume';
 import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import TypedName from '@/components/TypedName';
-import ScrollProgress from '@/components/ScrollProgress';
 import { useTheme } from '@/hooks/useTheme';
-
 
 const Index = () => {
   // Initialize theme
@@ -15,7 +13,6 @@ const Index = () => {
   
   return (
     <>
-      <ScrollProgress />
       <div className="min-h-screen bg-background text-foreground">
         <Navbar />
         
@@ -29,8 +26,8 @@ const Index = () => {
                 className="text-gradient font-extrabold" 
               />
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Data Scientist & Engineer turning complex data into actionable insights.
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+              A passionate Data Scientist and Engineer dedicated to transforming complex data into meaningful stories and actionable insights.
             </p>
           </div>
           <About />
@@ -42,7 +39,7 @@ const Index = () => {
         <footer className="py-8 text-center border-t border-border/50">
         <div className="container mx-auto px-4">
           <p className="text-muted-foreground">
-            © {new Date().getFullYear()} Rishi Guptha Mankala. All rights reserved.
+            © {new Date().getFullYear()} Rishi Guptha Mankala. All Rights Reserved.
           </p>
         </div>
       </footer>
