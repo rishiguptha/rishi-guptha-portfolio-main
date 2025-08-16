@@ -43,9 +43,9 @@ export const SKILLS = [
 export const EXPERIENCE = [
   {
     title: 'AI Machine Learning Engineer Intern',
-    company: 'Blue AI',
+    company: 'Nevara',
     date: 'June 2025 - Present',
-    logo: '/company-logos/blue-ai.png',
+    logo: '/company-logos/nevara-ai.png',
     description: 'Developing a state-of-the-art AI-powered sales optimization platform that enhances coaching effectiveness through intelligent analytics and automation. Designed and implemented an innovative workflow for automated sales call auditing, enabling coaches to identify performance patterns, track key metrics, and provide data-driven feedback to sales teams. The solution leverages advanced artificial intelligence models to analyze conversation dynamics, objection handling, and closing techniques, resulting in measurable improvements in sales performance and coaching productivity.'
   },
   {
