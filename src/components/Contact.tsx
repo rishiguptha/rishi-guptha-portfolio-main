@@ -362,7 +362,7 @@ const Contact: React.FC = () => {
               Sometimes a conversation is worth a thousand emails. Let's schedule a quick call to discuss your project.
             </p>
             <motion.a
-              href={CONTACT_INFO.calendly}
+              href={CONTACT_INFO.calcom}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-gradient px-8 py-4 rounded-full font-semibold text-lg inline-flex items-center gap-2"

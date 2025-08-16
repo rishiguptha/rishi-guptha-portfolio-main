@@ -175,7 +175,10 @@ export const CONTACT_INFO = {
   location: 'Stony Brook, NY, USA (Willing to relocate)',
   linkedin: 'https://linkedin.com/in/rishiguptha',
   github: 'https://github.com/rishiguptha',
-  calendly: 'https://calendly.com/rishigupthamankala'
+  // calendly: 'https://calendly.com/rishigupthamankala',
+  // Optional: set your Cal.com booking link to enable the embedded popup scheduler
+  // Example: 'https://cal.com/your-username/30min'
+  calcom: 'https://cal.com/rishi-guptha-mankala-3qg4sz/15min'
 };
 
 
