@@ -173,7 +173,7 @@ export const CONTACT_INFO = {
   email: 'rishiguptha.mankala@gmail.com',
   phone: '+1 (934) 263-3087',
   location: 'Stony Brook, NY, USA (Willing to relocate)',
-  linkedin: 'https://linkedin.com/in/rishiguptha',
+  linkedin: 'https://linkedin.com/in/rishi-guptha',
   github: 'https://github.com/rishiguptha',
   // calendly: 'https://calendly.com/rishigupthamankala',
   // Optional: set your Cal.com booking link to enable the embedded popup scheduler

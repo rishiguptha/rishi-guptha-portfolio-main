@@ -24,7 +24,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ["Inter", ...fontFamily.sans],
+				sans: ["Inter", "sans-serif", ...fontFamily.sans],
+				mono: ["'Courier New'", "monospace"], // Added for that raw code feel
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -66,6 +67,15 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
+            // Neo-Brutalism specific extensions
+			boxShadow: {
+				'neo': '4px 4px 0px 0px rgba(0,0,0,1)',
+				'neo-lg': '8px 8px 0px 0px rgba(0,0,0,1)',
+				'neo-sm': '2px 2px 0px 0px rgba(0,0,0,1)',
+			},
+            translate: {
+                'box': '4px',
+            },
 			keyframes: {
 				'accordion-down': {
 					from: { height: '0' },
@@ -79,9 +89,6 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-			},
-			transitionDuration: {
-				'2000': '2000ms',
 			},
 		}
 	},

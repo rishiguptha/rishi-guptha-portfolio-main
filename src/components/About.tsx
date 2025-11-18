@@ -1,165 +1,130 @@
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Brain, Target, Coffee, Trophy} from 'lucide-react';
-import { TECHNICAL_SKILLS} from '../lib/constants';
+import { Code, Brain, Target, Coffee, Trophy } from 'lucide-react';
+import { TECHNICAL_SKILLS } from '@/lib/constants';
 import ProfileImage from './ProfileImage';
+import SectionTitle from './SectionTitle';
 
 const About = () => {
   const driveItems = [
     {
-      icon: <Target className="w-8 h-8 text-blue-400" />,
+      icon: <Target className="w-8 h-8" />,
       title: "Problem Solving",
-      description: "I thrive on tackling complex data challenges and finding innovative solutions.",
-      color: "blue"
+      description: "Tackling complex data challenges with innovative solutions.",
+      color: "bg-blue-400"
     },
     {
-      icon: <Brain className="w-8 h-8 text-purple-400" />,
+      icon: <Brain className="w-8 h-8" />,
       title: "Impact-Driven",
-      description: "Every model I build aims to create real-world value and measurable outcomes.",
-      color: "purple"
+      description: "Building models that create real-world value.",
+      color: "bg-purple-400"
     },
     {
-      icon: <Trophy className="w-8 h-8 text-green-400" />,
+      icon: <Trophy className="w-8 h-8" />,
       title: "Continuous Learning",
-      description: "The field evolves rapidly, and I stay ahead with constant skill development.",
-      color: "green"
+      description: "Staying ahead with constant skill development.",
+      color: "bg-green-400"
     },
     {
-      icon: <Coffee className="w-8 h-8 text-orange-400" />,
+      icon: <Coffee className="w-8 h-8" />,
       title: "Coffee & Code",
-      description: "Best solutions emerge from late nights, strong coffee, and clean code.",
-      color: "orange"
+      description: "Late nights, strong coffee, and clean code.",
+      color: "bg-orange-400"
     }
   ];
 
   return (
-    <section id="about" className="py-20 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-green-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse" />
-      </div>
+    <section id="about" className="section-container bg-secondary/10 border-b-4 border-black dark:border-white">
+      <div className="container mx-auto px-6">
+        <SectionTitle title="WHO AM I?" subtitle="About Me" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-            About Me
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Data Science Researcher passionate about transforming complex data into actionable insights
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+        <div className="grid lg:grid-cols-12 gap-12 items-start mb-20">
+          {/* Profile Image Column */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            className="lg:col-span-5"
+            initial={{ opacity: 0, x: -50, rotate: -2 }}
+            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <ProfileImage />
+             <ProfileImage />
           </motion.div>
 
+          {/* Text Content Column */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            className="lg:col-span-7 space-y-6 bg-white dark:bg-card border-2 border-black dark:border-white p-8 shadow-neo"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="space-y-6"
           >
-                        <p className="text-lg text-foreground/80 leading-relaxed">
-             I'm a graduate student at <span className="text-purple-500 font-semibold">Stony Brook University</span> with a passion for uncovering stories hidden within data. My goal is to leverage my technical skills to build intelligent systems that solve real-world problems and drive impactful decisions.
-            </p>
-            
-            <p className="text-lg text-foreground/80 leading-relaxed">
-             When I'm not wrangling data, you can find me exploring new technologies or enjoying a good book. Feel free to reach out—I'm always open to new challenges and collaborations.
-            </p>
+             <h3 className="text-2xl font-bold border-l-8 border-primary pl-4 uppercase">
+               Data Scientist Researcher
+             </h3>
+             <p className="text-lg font-medium leading-relaxed">
+               I'm a graduate student at <span className="bg-primary text-white px-1">Stony Brook University</span> uncovering stories hidden within data. My goal is to leverage my technical skills to build intelligent systems that solve real-world problems.
+             </p>
+             <p className="text-lg font-medium leading-relaxed">
+               When I'm not wrangling data, you can find me exploring new technologies or enjoying a good book.
+             </p>
           </motion.div>
         </div>
 
-        {/* What Drives Me Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-20"
-        >
-          <h3 className="text-3xl font-bold text-center mb-12 text-gradient">What Drives Me</h3>
+        {/* What Drives Me */}
+        <div className="mb-20">
+          <h3 className="heading-md mb-8">WHAT DRIVES ME</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {driveItems.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                whileHover={{ y: -5, boxShadow: "0px 0px 0px 0px rgba(0,0,0,0)", translate: "4px 4px" }}
                 viewport={{ once: true }}
-                className={`modern-card group hover:scale-105 transition-all duration-300 hover:border-${item.color}-400/50`}
+                className="border-2 border-black dark:border-white bg-white dark:bg-card p-6 shadow-neo transition-all"
               >
-                <div className="flex flex-col items-center text-center p-6">
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="mb-4 p-3 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 shadow-lg"
-                  >
-                    {item.icon}
-                  </motion.div>
-                  <h4 className="text-xl font-semibold mb-3 text-foreground">{item.title}</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                <div className={`w-12 h-12 ${item.color} border-2 border-black flex items-center justify-center mb-4 shadow-sm`}>
+                  {item.icon}
                 </div>
+                <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                <p className="text-sm font-medium text-muted-foreground">{item.description}</p>
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Technical Skills Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-20"
-        >
-          <h3 className="text-3xl font-bold text-center mb-12 text-gradient">Technical Expertise</h3>
+        {/* Skills */}
+        <div>
+          <h3 className="heading-md mb-8">TECH STACK</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {Object.entries(TECHNICAL_SKILLS).map(([category, skills], index) => (
               <motion.div
                 key={category}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="modern-card"
+                className="border-2 border-black dark:border-white bg-white dark:bg-card"
               >
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <Code className="w-6 h-6 text-blue-400 mr-3" />
-                    <h4 className="text-xl font-semibold text-foreground">{category}</h4>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {skills.map((skill, skillIndex) => (
-                      <motion.span
-                        key={skillIndex}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3, delay: skillIndex * 0.05 }}
-                        viewport={{ once: true }}
-                        whileHover={{ scale: 1.05 }}
-                        className="px-3 py-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-full text-sm text-blue-300 hover:from-blue-600/30 hover:to-purple-600/30 transition-all duration-200 cursor-default"
-                      >
-                        {skill}
-                      </motion.span>
-                    ))}
-                  </div>
+                <div className="bg-black dark:bg-white text-white dark:text-black p-3 font-bold uppercase flex items-center gap-2">
+                    <Code className="w-5 h-5" /> {category}
+                </div>
+                <div className="p-6 flex flex-wrap gap-2">
+                  {skills.map((skill) => (
+                    <motion.span 
+                      key={skill} 
+                      whileHover={{ scale: 1.1, rotate: 2 }}
+                      className="px-3 py-1 border-2 border-black dark:border-white bg-secondary text-xs font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] cursor-default"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
                 </div>
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -4,85 +4,69 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
+    /* Neo-Brutalism Light Mode */
+    --background: 0 0% 100%; /* Pure White */
+    --foreground: 0 0% 0%;   /* Pure Black */
 
     --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
+    --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 220.9 39.3% 11%;
-    --primary-foreground: 210 20% 98%;
+    --primary: 262 83% 58%; /* Keep the purple, but make it pop */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
+    --secondary: 60 100% 50%; /* Bright Yellow for accents */
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
+    --accent: 190 100% 50%; /* Cyan */
+    --accent-foreground: 0 0% 0%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 224 71.4% 4.1%;
+    --border: 0 0% 0%; /* Black Borders */
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
 
-    --radius: 0.5rem;
-    
-    /* Custom gradient variables */
-    --gradient-primary: linear-gradient(135deg, hsl(220.9 39.3% 11%) 0%, hsl(221 83% 53%) 50%, hsl(262 83% 58%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(220 14.3% 95.9%) 0%, hsl(210 40% 98%) 100%);
-    --gradient-accent: linear-gradient(45deg, hsl(262 83% 58%) 0%, hsl(221 83% 53%) 50%, hsl(220.9 39.3% 11%) 100%);
-    
-    /* Glassmorphism variables */
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --radius: 0.5rem; /* Slightly sharper corners */
   }
 
   .dark {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
+    /* Neo-Brutalism Dark Mode (often just inverted or high contrast) */
+    --background: 260 20% 10%; /* Dark bg */
+    --foreground: 60 100% 50%; /* Yellow text for terminal feel */
 
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 20% 98%;
+    --card: 260 20% 15%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 260 20% 15%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 210 20% 98%;
-    --primary-foreground: 220.9 39.3% 11%;
+    --primary: 262 83% 68%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 20% 98%;
+    --secondary: 190 100% 50%;
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
+    --muted: 260 20% 20%;
+    --muted-foreground: 260 10% 80%;
 
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
+    --accent: 320 100% 50%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 216 12.2% 83.9%;
+    --border: 0 0% 100%; /* White borders in dark mode */
+    --input: 0 0% 100%;
+    --ring: 60 100% 50%;
     
-    /* Dark mode gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(210 20% 98%) 0%, hsl(221 83% 53%) 50%, hsl(262 83% 58%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(215 27.9% 16.9%) 0%, hsl(224 71.4% 4.1%) 100%);
-    --gradient-accent: linear-gradient(45deg, hsl(262 83% 58%) 0%, hsl(221 83% 53%) 50%, hsl(210 20% 98%) 100%);
-    
-    /* Dark mode glassmorphism */
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --radius: 0.5rem;
   }
 }
 
@@ -97,177 +81,47 @@ html {
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background-image: 
-      radial-gradient(at 40% 20%, hsla(262, 83%, 58%, 0.1) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, hsla(221, 83%, 53%, 0.1) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, hsla(262, 83%, 58%, 0.1) 0px, transparent 50%);
-    background-attachment: fixed;
-    min-height: 100vh;
-  }
-  
-  .dark body {
-    background-image: 
-      radial-gradient(at 40% 20%, hsla(262, 83%, 58%, 0.2) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, hsla(221, 83%, 53%, 0.2) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, hsla(262, 83%, 58%, 0.2) 0px, transparent 50%);
+    /* Dot Pattern Background */
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.98; /* Slight opacity to let pattern sit back */
   }
 }
 
 @layer components {
   .section-container {
-    @apply w-full py-24 relative;
+    @apply w-full py-24 relative border-t-2 border-black dark:border-white bg-background/95 backdrop-blur-sm;
   }
   
   .text-gradient {
-    background: var(--gradient-primary);
-    @apply bg-clip-text text-transparent;
+    /* Removed gradient for solid bold colors in brutalism */
+    @apply text-primary font-black tracking-tighter;
   }
   
   .text-gradient-accent {
-    background: var(--gradient-accent);
-    @apply bg-clip-text text-transparent;
+    @apply text-secondary-foreground bg-secondary px-1;
   }
-  
-  /* Ensure gradients work in light mode */
-  .light .text-gradient {
-    background: linear-gradient(135deg, hsl(262 83% 58%) 0%, hsl(221 83% 53%) 50%, hsl(220.9 39.3% 11%) 100%);
-    @apply bg-clip-text text-transparent;
-  }
-  
-  .light .text-gradient-accent {
-    background: linear-gradient(45deg, hsl(262 83% 58%) 0%, hsl(221 83% 53%) 50%, hsl(220.9 39.3% 11%) 100%);
-    @apply bg-clip-text text-transparent;
-  }
-  
-  /* Glassmorphism effect */
-  .glass-effect {
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
-  }
-  
-  /* Enhanced gradient backgrounds */
-  .gradient-bg {
-    background: var(--gradient-primary);
-  }
-  
-  .gradient-bg-secondary {
-    background: var(--gradient-secondary);
-  }
-  
-  /* Light mode text fixes */
-  .light .text-white {
-    @apply text-foreground;
-  }
-  
-  .light .text-gray-300 {
-    @apply text-foreground/80;
-  }
-  
-  .light .text-gray-400 {
-    @apply text-muted-foreground;
-  }
-  
-  /* Floating animation */
-  .float {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-  
-  /* Glow effect */
-  .glow {
-    box-shadow: 0 0 20px hsla(262, 83%, 58%, 0.3);
-  }
-  
-  .glow-hover:hover {
-    box-shadow: 0 0 30px hsla(262, 83%, 58%, 0.4);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  /* Enhanced button styles */
-  .btn-gradient {
-    background: var(--gradient-primary);
-    @apply text-white border-0 shadow-lg transition-all duration-300;
-  }
-  
-  .btn-gradient:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Modern card styles */
+
+  /* Replaces glass-effect with Neo-Brutal Card style */
   .modern-card {
-    @apply bg-card/80 backdrop-blur-lg border border-border/50 rounded-2xl p-6 shadow-lg;
-    transition: all 0.3s ease;
+    @apply bg-card border-2 border-border rounded-lg p-6 shadow-neo hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all duration-200;
   }
   
-  .modern-card:hover {
-    @apply shadow-2xl border-border transform scale-[1.02];
+  /* Button Styles */
+  .btn-gradient {
+    @apply bg-primary text-primary-foreground border-2 border-black dark:border-white font-bold px-6 py-3 shadow-neo hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all duration-200 rounded-md;
   }
-  
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    @apply bg-background;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: var(--gradient-primary);
-    @apply rounded-full;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--gradient-accent);
-  }
-  
-  /* Pulse animation for loading states */
-  .pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
-  }
-  
-  @keyframes pulse-glow {
-    0%, 100% { 
-      box-shadow: 0 0 5px hsla(262, 83%, 58%, 0.5);
-    }
-    50% { 
-      box-shadow: 0 0 20px hsla(262, 83%, 58%, 0.8);
-    }
-  }
-  
-  /* Enhanced typography */
+
+  /* Typography */
   .heading-xl {
-    @apply text-4xl md:text-6xl font-bold leading-tight tracking-tight;
+    @apply text-5xl md:text-7xl font-black leading-none tracking-tighter;
   }
   
   .heading-lg {
-    @apply text-3xl md:text-4xl font-bold leading-tight;
+    @apply text-3xl md:text-5xl font-bold leading-tight tracking-tight;
   }
   
   .heading-md {
-    @apply text-2xl md:text-3xl font-semibold leading-tight;
-  }
-  
-  /* Parallax container */
-  .parallax-container {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .parallax-element {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    will-change: transform;
+    @apply text-2xl md:text-3xl font-bold leading-tight border-b-4 border-primary inline-block pr-4 mb-4;
   }
 }

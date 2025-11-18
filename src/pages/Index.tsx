@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowDown, Sparkles, Download } from 'lucide-react';
+import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowDown, Terminal, Download } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import About from '@/components/About';
 import Resume from '@/components/Resume';
@@ -11,258 +11,163 @@ import { useTheme } from '@/hooks/useTheme';
 import { RESUME_URL } from '@/lib/constants';
 
 const Index = () => {
-  // Initialize theme
   useTheme();
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
-  const heroVariants = {
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      },
-    },
+      transition: { 
+        staggerChildren: 0.15,
+        delayChildren: 0.2
+      }
+    }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const floatingVariants = {
-    animate: {
-      y: [-10, 10, -10],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
+    hidden: { opacity: 0, y: 50, rotate: 5 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      rotate: 0,
+      transition: { type: "spring", stiffness: 80, damping: 15 }
+    }
   };
 
   return (
-    <>
-      <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-        <Navbar />
-        
-        {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center">
-          {/* Background Elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            {/* Floating particles */}
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-primary/20 rounded-full"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  y: [-20, 20, -20],
-                  x: [-10, 10, -10],
-                  opacity: [0.3, 0.8, 0.3],
-                }}
-                transition={{
-                  duration: 3 + Math.random() * 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: Math.random() * 2,
-                }}
-              />
-            ))}
-            
-            {/* Large gradient orbs */}
-            <motion.div
-              className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full blur-3xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.5, 0.3],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            <motion.div
-              className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
-              animate={{
-                scale: [1.2, 1, 1.2],
-                opacity: [0.5, 0.3, 0.5],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 4,
-              }}
-            />
-          </div>
+    <div className="min-h-screen bg-background text-foreground selection:bg-secondary selection:text-secondary-foreground overflow-hidden">
+      <Navbar />
+      
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center pt-20 border-b-4 border-black dark:border-white overflow-hidden">
+        {/* Abstract Motion Background */}
+        <div className="absolute inset-0 overflow-hidden -z-10 opacity-5 pointer-events-none">
+           <motion.div 
+             style={{ y }}
+             className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary rounded-full mix-blend-multiply filter blur-3xl"
+           />
+           <motion.div 
+             style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
+             className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary rounded-full mix-blend-multiply filter blur-3xl"
+           />
+        </div>
 
-          {/* Hero Content */}
+        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
           <motion.div
-            className="container mx-auto px-4 py-16 text-center relative z-10"
-            variants={heroVariants}
+            variants={containerVariants}
             initial="hidden"
             animate="visible"
+            className="space-y-8"
           >
-            {/* Greeting */}
-            <motion.div
-              variants={itemVariants}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-effect mb-6"
-            >
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium">Welcome to my portfolio</span>
-            </motion.div>
 
-            {/* Main heading */}
-            <motion.h1
-              variants={itemVariants}
-              className="heading-xl mb-6"
-            >
-              Hello, I'm{' '}
-              <br className="hidden sm:block" />
-              <TypedName 
-                text="Rishi Guptha Mankala" 
-                speed={100} 
-                className="text-gradient font-extrabold" 
+            <div className="relative">
+              <motion.h1 variants={itemVariants} className="heading-xl relative z-20">
+                HI, I'M <br/>
+                <span className="text-primary bg-black/5 px-2 -ml-2 inline-block">
+                  <TypedName text="RISHI GUPTHA" speed={100} />
+                </span>
+              </motion.h1>
+              {/* Decorative elements behind text */}
+              <motion.div 
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 1, duration: 0.8, ease: "circOut" }}
+                className="absolute bottom-2 left-0 w-full h-6 bg-secondary/30 -z-10 origin-left transform -rotate-1"
               />
-            </motion.h1>
+            </div>
 
-            {/* Subtitle */}
-            <motion.p
-              variants={itemVariants}
-              className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-8 leading-relaxed"
-            >
-              A passionate{' '}
-              <span className="text-gradient-accent font-semibold">Data Scientist & Engineer</span>{' '}
-              dedicated to transforming complex data into meaningful stories and actionable insights.
+            <motion.p variants={itemVariants} className="text-xl font-medium text-muted-foreground max-w-lg border-l-4 border-secondary pl-4">
+              Data Scientist & Engineer. <br/>
+              Turning messy data into <span className="bg-secondary text-secondary-foreground px-1 font-bold">strict logic</span>.
             </motion.p>
 
-            {/* CTA Buttons */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
-            >
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
               <motion.button
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="btn-gradient px-8 py-4 rounded-full font-semibold text-lg inline-flex items-center gap-2"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, boxShadow: "0px 0px 0px 0px rgba(0,0,0,1)", x: 4, y: 4 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-black text-white dark:bg-white dark:text-black px-8 py-4 font-bold border-2 border-transparent shadow-neo transition-all flex items-center gap-2"
               >
-                View My Work
-                <ArrowDown className="w-5 h-5" />
+                VIEW WORK <ArrowDown size={20} />
               </motion.button>
               
               <motion.a
                 href={RESUME_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 rounded-full font-semibold text-lg border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 inline-flex items-center gap-2"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, boxShadow: "0px 0px 0px 0px rgba(0,0,0,1)", x: 4, y: 4 }}
                 whileTap={{ scale: 0.95 }}
+                className="bg-white dark:bg-black text-black dark:text-white px-8 py-4 font-bold border-2 border-black dark:border-white shadow-neo transition-all flex items-center gap-2"
               >
-                <Download className="w-5 h-5" />
-                Download Resume
+                RESUME <Download size={20} />
               </motion.a>
             </motion.div>
+          </motion.div>
 
-            {/* Scroll indicator */}
-            <motion.div
-              variants={floatingVariants}
-              animate="animate"
-              className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          {/* Right side graphic */}
+          <motion.div
+             initial={{ opacity: 0, x: 50, rotate: 5 }}
+             animate={{ opacity: 1, x: 0, rotate: 3 }}
+             transition={{ duration: 0.8, type: "spring" }}
+             className="hidden md:block relative"
+          >
+            <motion.div 
+              className="relative z-10 bg-white p-2 border-4 border-black shadow-neo-lg"
+              whileHover={{ rotate: 0, scale: 1.02 }}
             >
-              <motion.div
-                className="w-6 h-10 border-2 border-primary rounded-full flex justify-center"
-                whileHover={{ scale: 1.1 }}
-              >
-                <motion.div
-                  className="w-1 h-3 bg-primary rounded-full mt-2"
-                  animate={{
-                    y: [0, 12, 0],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-              </motion.div>
+                <img src="/profile.jpeg" alt="Rishi" className="w-full h-auto grayscale contrast-125 hover:grayscale-0 transition-all duration-500" />
+                <motion.div 
+                  className="absolute -bottom-6 -right-6 bg-secondary border-2 border-black p-4 font-mono text-xs font-bold shadow-neo"
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                >
+                    &lt;Coder /&gt;
+                </motion.div>
             </motion.div>
           </motion.div>
-        </section>
-        
-        {/* Main Content */}
-        <main>
-          <About />
-          <Resume />
-          <Projects />
-          <Contact />
-        </main>
-        
-        {/* Enhanced Footer */}
-        <footer className="relative py-12 border-t border-border/20">
-          <div className="absolute inset-0 glass-effect" />
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h3 className="text-2xl font-bold text-gradient mb-4">
-                  Rishi Guptha Mankala
-                </h3>
-                <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                  Transforming data into insights, one project at a time.
-                </p>
-                <div className="flex justify-center items-center space-x-6 mb-6">
-                  <motion.a
-                    href="https://github.com/rishiguptha"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                  >
-                    GitHub
-                  </motion.a>
-                  <motion.a
-                    href="https://linkedin.com/in/rishiguptha"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                  >
-                    LinkedIn
-                  </motion.a>
-                  <motion.a
-                    href="mailto:rishiguptha.mankala@stonybrook.edu"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                  >
-                    Email
-                  </motion.a>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  © {new Date().getFullYear()} Rishi Guptha Mankala. All rights reserved.
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </footer>
-      </div>
-    </>
+        </div>
+      </section>
+
+      <main>
+        <About />
+        <Resume />
+        <Projects />
+        <Contact />
+      </main>
+      
+      <footer className="py-12 border-t-4 border-black dark:border-white bg-secondary/20">
+        <div className="container mx-auto px-4 text-center">
+           <motion.h2 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             className="heading-lg mb-6"
+           >
+             LET'S BUILD SOMETHING
+           </motion.h2>
+           <div className="flex justify-center gap-6 font-bold font-mono">
+             {[
+               { name: "GITHUB", href: "https://github.com/rishiguptha" },
+               { name: "LINKEDIN", href: "https://linkedin.com/in/rishiguptha" },
+               { name: "MAIL", href: "mailto:rishiguptha.mankala@stonybrook.edu" }
+             ].map((link) => (
+               <motion.a 
+                 key={link.name}
+                 href={link.href} 
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 whileHover={{ scale: 1.1, rotate: -5 }}
+                 className="hover:bg-black hover:text-white px-2 transition-colors"
+               >
+                 {link.name}
+               </motion.a>
+             ))}
+           </div>
+           <p className="mt-8 font-mono text-sm opacity-60">© {new Date().getFullYear()} Rishi Guptha Mankala.</p>
+        </div>
+      </footer>
+    </div>
   );
 };
 

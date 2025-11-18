@@ -1,31 +1,10 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import SectionTitle from './SectionTitle';
 import ProjectCard from './ProjectCard';
 import { PROJECTS } from '@/lib/constants';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Filter } from 'lucide-react';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-};
+import { Input } from '@/components/ui/input';
 
 const Projects: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -34,26 +13,16 @@ const Projects: React.FC = () => {
   const categories = useMemo(() => {
     const allCategories = PROJECTS.flatMap(p => p.categories || []);
     const uniqueCategories = Array.from(new Set(allCategories));
-    console.log('Available categories:', uniqueCategories);
     return ['All', ...uniqueCategories];
   }, []);
 
   const filteredProjects = useMemo(() => {
-    console.log('Filtering with category:', selectedCategory);
-    console.log('All projects:', PROJECTS.length);
+    let filtered = [...PROJECTS];
     
-    let filtered = [...PROJECTS]; // Create a copy to avoid mutation
-    
-    // Filter by category
     if (selectedCategory !== 'All') {
-      filtered = filtered.filter(p => {
-        const hasCategory = p.categories && p.categories.includes(selectedCategory);
-        console.log(`Project "${p.title}" categories:`, p.categories, 'includes', selectedCategory, ':', hasCategory);
-        return hasCategory;
-      });
+      filtered = filtered.filter(p => p.categories?.includes(selectedCategory));
     }
     
-    // Filter by search term
     if (searchTerm) {
       filtered = filtered.filter(p => 
         p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -61,145 +30,95 @@ const Projects: React.FC = () => {
         p.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
-    
-    console.log('Filtered projects count:', filtered.length);
     return filtered;
   }, [selectedCategory, searchTerm]);
 
-  // Debug effect
-  useEffect(() => {
-    console.log('Projects data structure:', PROJECTS.map(p => ({
-      title: p.title,
-      categories: p.categories
-    })));
-  }, []);
-
-  const handleCategoryChange = (category: string) => {
-    console.log('Category selected:', category);
-    setSelectedCategory(category);
-  };
-
   return (
-    <section id="projects" className="section-container">
+    <section id="projects" className="section-container bg-secondary/10 border-t-4 border-black">
       <div className="container mx-auto px-4">
-        <SectionTitle title="MY PROJECTS" subtitle="A Selection of My Work" />
+        <SectionTitle title="MY WORK" subtitle="Selected Projects" />
 
-        {/* Search and Filter Controls */}
-        <div className="max-w-4xl mx-auto mb-12 space-y-6">
-          {/* Search Bar */}
+        {/* Controls */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto mb-16 space-y-8 bg-white dark:bg-card border-2 border-black p-6 shadow-neo"
+        >
+          {/* Search */}
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-            <input
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black w-5 h-5" />
+            <Input
               type="text"
-              placeholder="Search projects by name, description, or technology..."
+              placeholder="SEARCH PROJECTS..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 bg-card/80 backdrop-blur-lg border border-border/50 rounded-2xl focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder:text-muted-foreground"
+              className="pl-12 py-6 text-lg font-bold uppercase"
             />
           </div>
 
-          {/* Category Filters */}
+          {/* Filter */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide">
               <Filter className="w-4 h-4" />
               <span>Filter by category:</span>
             </div>
             
-            <div className="flex flex-wrap justify-center gap-3">
-              {categories.map((category, index) => (
-                <button
+            <div className="flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <motion.button
                   key={category}
-                  onClick={() => handleCategoryChange(category)}
-                  className={`px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 border ${
+                  onClick={() => setSelectedCategory(category)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`px-4 py-2 font-bold text-sm border-2 border-black transition-all duration-200 ${
                     selectedCategory === category
-                      ? 'bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg border-primary'
-                      : 'bg-card/80 backdrop-blur-lg border-border/50 text-foreground hover:bg-primary/10 hover:border-primary/30'
+                      ? 'bg-primary text-white shadow-neo transform -translate-y-1'
+                      : 'bg-white text-black hover:bg-secondary'
                   }`}
                 >
-                  {category}
-                </button>
+                  {category.toUpperCase()}
+                </motion.button>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Results Count */}
-        <div className="text-center mb-8">
-          <p className="text-muted-foreground">
-            Showing {filteredProjects.length} of {PROJECTS.length} projects
-            {searchTerm && (
-              <span className="text-primary ml-1">
-                matching "{searchTerm}"
-              </span>
-            )}
-            {selectedCategory !== 'All' && (
-              <span className="text-primary ml-1">
-                in category "{selectedCategory}"
-              </span>
-            )}
-          </p>
-        </div>
-
-        {/* Project Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.length > 0 ? (
-            filteredProjects.map((project, index) => (
-              <div key={`${project.title}-${selectedCategory}`}>
-                <ProjectCard project={project} />
-              </div>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-16">
-              <div className="max-w-md mx-auto">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-secondary flex items-center justify-center">
-                  <Search className="w-8 h-8 text-muted-foreground" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">No projects found</h3>
-                <p className="text-muted-foreground mb-4">
-                  No projects match your current filters. Try adjusting your search or category selection.
-                </p>
-                <button
-                  onClick={() => {
-                    setSelectedCategory('All');
-                    setSearchTerm('');
-                  }}
-                  className="bg-gradient-to-r from-primary to-primary/80 text-white px-6 py-3 rounded-full font-medium"
-                >
-                  Clear Filters
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Call to Action */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        {/* Grid with Layout Animation */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          <motion.div
-            className="max-w-2xl mx-auto glass-effect rounded-2xl p-8"
-            whileHover={{ y: -5 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h3 className="text-2xl font-bold text-gradient mb-4">
-              Interested in Collaboration?
-            </h3>
-            <p className="text-muted-foreground mb-6">
-              I'm always open to discussing new opportunities, innovative projects, and ways to solve complex data challenges together.
-            </p>
-            <motion.button
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-gradient px-8 py-4 rounded-full font-semibold text-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Let's Connect
-            </motion.button>
-          </motion.div>
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.length > 0 ? (
+              filteredProjects.map((project) => (
+                <motion.div 
+                  layout
+                  key={project.title}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ProjectCard project={project} />
+                </motion.div>
+              ))
+            ) : (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="col-span-full text-center py-16 border-2 border-dashed border-gray-400"
+              >
+                <h3 className="text-xl font-bold uppercase mb-2">No projects found</h3>
+                <button
+                  onClick={() => { setSelectedCategory('All'); setSearchTerm(''); }}
+                  className="underline font-bold text-primary hover:text-secondary-foreground transition-colors"
+                >
+                  Reset Filters
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>
