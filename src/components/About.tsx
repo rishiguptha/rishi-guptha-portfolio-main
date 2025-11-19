@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Brain, Target, Coffee, Trophy } from 'lucide-react';
 import { TECHNICAL_SKILLS } from '@/lib/constants';
-import ProfileImage from './ProfileImage';
+
 import SectionTitle from './SectionTitle';
 
 const About = () => {
@@ -39,34 +39,22 @@ const About = () => {
         <SectionTitle title="WHO AM I?" subtitle="About Me" />
 
         <div className="grid lg:grid-cols-12 gap-12 items-start mb-20">
-          {/* Profile Image Column */}
           <motion.div
-            className="lg:col-span-5"
-            initial={{ opacity: 0, x: -50, rotate: -2 }}
-            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-             <ProfileImage />
-          </motion.div>
-
-          {/* Text Content Column */}
-          <motion.div
-            className="lg:col-span-7 space-y-6 bg-white dark:bg-card border-2 border-black dark:border-white p-8 shadow-neo"
+            className="lg:col-span-8 lg:col-start-3 space-y-6 bg-white dark:bg-card border-2 border-black dark:border-white p-8 shadow-neo"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-             <h3 className="text-2xl font-bold border-l-8 border-primary pl-4 uppercase">
-               Data Scientist Researcher
-             </h3>
-             <p className="text-lg font-medium leading-relaxed">
-               I'm a graduate student at <span className="bg-primary text-white px-1">Stony Brook University</span> uncovering stories hidden within data. My goal is to leverage my technical skills to build intelligent systems that solve real-world problems.
-             </p>
-             <p className="text-lg font-medium leading-relaxed">
-               When I'm not wrangling data, you can find me exploring new technologies or enjoying a good book.
-             </p>
+            <h3 className="text-2xl font-bold border-l-8 border-primary pl-4 uppercase">
+              Data Scientist and Data Engineer
+            </h3>
+            <p className="text-lg font-medium leading-relaxed">
+              I'm a graduate student at Stony Brook University uncovering stories hidden within data. My goal is to leverage my technical skills to build intelligent systems that solve real-world problems.
+            </p>
+            <p className="text-lg font-medium leading-relaxed">
+              When I'm not wrangling data, you can find me exploring new technologies or enjoying a good book.
+            </p>
           </motion.div>
         </div>
 
@@ -84,7 +72,7 @@ const About = () => {
                 viewport={{ once: true }}
                 className="border-2 border-black dark:border-white bg-white dark:bg-card p-6 shadow-neo transition-all"
               >
-                <div className={`w-12 h-12 ${item.color} border-2 border-black flex items-center justify-center mb-4 shadow-sm`}>
+                <div className={`w-12 h-12 ${item.color} border-2 border-black dark:border-white flex items-center justify-center mb-4 shadow-sm`}>
                   {item.icon}
                 </div>
                 <h4 className="text-xl font-bold mb-2">{item.title}</h4>
@@ -108,14 +96,14 @@ const About = () => {
                 className="border-2 border-black dark:border-white bg-white dark:bg-card"
               >
                 <div className="bg-black dark:bg-white text-white dark:text-black p-3 font-bold uppercase flex items-center gap-2">
-                    <Code className="w-5 h-5" /> {category}
+                  <Code className="w-5 h-5" /> {category}
                 </div>
                 <div className="p-6 flex flex-wrap gap-2">
                   {skills.map((skill) => (
-                    <motion.span 
-                      key={skill} 
+                    <motion.span
+                      key={skill}
                       whileHover={{ scale: 1.1, rotate: 2 }}
-                      className="px-3 py-1 border-2 border-black dark:border-white bg-secondary text-xs font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] cursor-default"
+                      className="px-3 py-1 border-2 border-black dark:border-white bg-secondary text-xs font-bold shadow-neo-sm cursor-default"
                     >
                       {skill}
                     </motion.span>
@@ -126,7 +114,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 

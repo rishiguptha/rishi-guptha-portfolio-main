@@ -44,7 +44,7 @@ export const EXPERIENCE = [
   {
     title: 'AI Machine Learning Engineer Intern',
     company: 'Nevara',
-    date: 'June 2025 - Present',
+    date: 'June 2025 - Aug 2025',
     logo: '/company-logos/nevara-ai.jpeg',
     description: 'Developing a state-of-the-art AI-powered sales optimization platform that enhances coaching effectiveness through intelligent analytics and automation. Designed and implemented an innovative workflow for automated sales call auditing, enabling coaches to identify performance patterns, track key metrics, and provide data-driven feedback to sales teams. The solution leverages advanced artificial intelligence models to analyze conversation dynamics, objection handling, and closing techniques, resulting in measurable improvements in sales performance and coaching productivity.'
   },
@@ -173,8 +173,8 @@ export const CONTACT_INFO = {
   email: 'rishiguptha.mankala@gmail.com',
   phone: '+1 (934) 263-3087',
   location: 'Stony Brook, NY, USA (Willing to relocate)',
-  linkedin: 'https://linkedin.com/in/rishi-guptha',
-  github: 'https://github.com/rishiguptha',
+  linkedin: 'https://www.linkedin.com/in/rishi-guptha/',
+  github: 'https://github.com/rishi-guptha',
   // calendly: 'https://calendly.com/rishigupthamankala',
   // Optional: set your Cal.com booking link to enable the embedded popup scheduler
   // Example: 'https://cal.com/your-username/30min'
@@ -190,5 +190,5 @@ export const TECHNICAL_SKILLS = {
   'Data Visualization': ['Power BI', 'Tableau', 'Looker Studio', 'AWS QuickSight', 'Matplotlib'],
   'Tools & Platforms': ['Linux', 'Docker', 'Astronomer', 'Git', 'GitHub', 'Microsoft Excel', 'Google Sheets', 'Collibra']
 };
-   
+
 

@@ -7,11 +7,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
+import CustomCursor from "@/components/CustomCursor";
+import ScrollToTop from "@/components/ScrollToTop";
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <CustomCursor />
+      <ScrollToTop />
       <AnimatePresence mode="wait">
         <motion.div
           initial={{ opacity: 0 }}

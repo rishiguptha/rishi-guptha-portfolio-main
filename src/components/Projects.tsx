@@ -18,13 +18,13 @@ const Projects: React.FC = () => {
 
   const filteredProjects = useMemo(() => {
     let filtered = [...PROJECTS];
-    
+
     if (selectedCategory !== 'All') {
       filtered = filtered.filter(p => p.categories?.includes(selectedCategory));
     }
-    
+
     if (searchTerm) {
-      filtered = filtered.filter(p => 
+      filtered = filtered.filter(p =>
         p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -34,65 +34,53 @@ const Projects: React.FC = () => {
   }, [selectedCategory, searchTerm]);
 
   return (
-    <section id="projects" className="section-container bg-secondary/10 border-t-4 border-black">
-      <div className="container mx-auto px-4">
-        <SectionTitle title="MY WORK" subtitle="Selected Projects" />
+    <section id="projects" className="section-container bg-secondary/10 border-t-4 border-black dark:border-white">
+      <div className="container mx-auto px-6">
+        <SectionTitle title="MY WORK" subtitle="Featured Projects" />
 
-        {/* Controls */}
-        <motion.div 
+        {/* Search and Filter */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto mb-16 space-y-8 bg-white dark:bg-card border-2 border-black p-6 shadow-neo"
+          className="max-w-4xl mx-auto mb-16 space-y-8 bg-white dark:bg-card border-2 border-black dark:border-white p-6 shadow-neo"
         >
-          {/* Search */}
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black w-5 h-5" />
-            <Input
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black dark:text-white w-5 h-5" />
+            <input
               type="text"
-              placeholder="SEARCH PROJECTS..."
+              placeholder="Search projects..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-12 py-6 text-lg font-bold uppercase"
+              className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-background border-2 border-black dark:border-white focus:outline-none focus:ring-2 focus:ring-primary font-mono text-sm"
             />
           </div>
 
-          {/* Filter */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide">
-              <Filter className="w-4 h-4" />
-              <span>Filter by category:</span>
-            </div>
-            
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <motion.button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`px-4 py-2 font-bold text-sm border-2 border-black transition-all duration-200 ${
-                    selectedCategory === category
-                      ? 'bg-primary text-white shadow-neo transform -translate-y-1'
-                      : 'bg-white text-black hover:bg-secondary'
+          <div className="flex flex-wrap justify-center gap-3">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 font-bold text-sm border-2 border-black dark:border-white transition-all duration-200 ${selectedCategory === category
+                    ? 'bg-primary text-white shadow-neo-sm'
+                    : 'bg-white dark:bg-black text-black dark:text-white hover:bg-secondary'
                   }`}
-                >
-                  {category.toUpperCase()}
-                </motion.button>
-              ))}
-            </div>
+              >
+                {category.toUpperCase()}
+              </button>
+            ))}
           </div>
         </motion.div>
 
         {/* Grid with Layout Animation */}
-        <motion.div 
+        <motion.div
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.length > 0 ? (
               filteredProjects.map((project) => (
-                <motion.div 
+                <motion.div
                   layout
                   key={project.title}
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -104,7 +92,7 @@ const Projects: React.FC = () => {
                 </motion.div>
               ))
             ) : (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="col-span-full text-center py-16 border-2 border-dashed border-gray-400"

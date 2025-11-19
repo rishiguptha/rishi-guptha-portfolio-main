@@ -24,7 +24,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ["Inter", "sans-serif", ...fontFamily.sans],
+				sans: ["Space Grotesk", "sans-serif", ...fontFamily.sans],
 				mono: ["'Courier New'", "monospace"], // Added for that raw code feel
 			},
 			colors: {
@@ -67,15 +67,15 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
-            // Neo-Brutalism specific extensions
+			// Neo-Brutalism specific extensions
 			boxShadow: {
-				'neo': '4px 4px 0px 0px rgba(0,0,0,1)',
-				'neo-lg': '8px 8px 0px 0px rgba(0,0,0,1)',
-				'neo-sm': '2px 2px 0px 0px rgba(0,0,0,1)',
+				'neo': '4px 4px 0px 0px rgba(var(--shadow-color), 1)',
+				'neo-lg': '8px 8px 0px 0px rgba(var(--shadow-color), 1)',
+				'neo-sm': '2px 2px 0px 0px rgba(var(--shadow-color), 1)',
 			},
-            translate: {
-                'box': '4px',
-            },
+			translate: {
+				'box': '4px',
+			},
 			keyframes: {
 				'accordion-down': {
 					from: { height: '0' },
