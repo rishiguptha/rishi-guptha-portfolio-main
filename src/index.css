@@ -3,80 +3,86 @@
 @tailwind utilities;
 
 @layer base {
+
+    /* Warm Minimalism - Dark Mode (Primary) */
     :root {
-        /* Terminal Noir Light Theme */
-        --background: 210 40% 98%;
-        --foreground: 222 47% 11%;
+        /* Rich charcoal background with warmth */
+        --background: 20 10% 8%;
+        --foreground: 40 20% 95%;
 
-        --card: 0 0% 100%;
-        --card-foreground: 222 47% 11%;
+        /* Cards with subtle warmth */
+        --card: 20 8% 12%;
+        --card-foreground: 40 20% 95%;
 
-        --popover: 0 0% 100%;
-        --popover-foreground: 222 47% 11%;
+        /* Soft popover */
+        --popover: 20 8% 10%;
+        --popover-foreground: 40 20% 95%;
 
-        --primary: 239 84% 67%;
-        --primary-foreground: 0 0% 100%;
+        /* Terracotta/Coral accent */
+        --primary: 12 76% 61%;
+        --primary-foreground: 20 10% 8%;
 
-        --secondary: 160 84% 39%;
-        --secondary-foreground: 0 0% 100%;
+        /* Sage secondary */
+        --secondary: 150 20% 40%;
+        --secondary-foreground: 40 20% 95%;
 
-        --accent: 38 92% 50%;
-        --accent-foreground: 0 0% 0%;
+        /* Warm muted tones */
+        --muted: 20 10% 18%;
+        --muted-foreground: 40 10% 60%;
 
-        --muted: 215 16% 47%;
-        --muted-foreground: 215 16% 47%;
+        /* Cream-tinted accent */
+        --accent: 40 30% 90%;
+        --accent-foreground: 20 10% 8%;
 
-        --destructive: 0 84% 60%;
-        --destructive-foreground: 0 0% 98%;
+        /* Subtle borders */
+        --border: 20 10% 20%;
+        --input: 20 10% 18%;
+        --ring: 12 76% 61%;
 
-        --border: 214 32% 91%;
-        --input: 214 32% 91%;
-        --ring: 239 84% 67%;
+        /* Status colors */
+        --destructive: 0 72% 51%;
+        --destructive-foreground: 40 20% 95%;
 
         --radius: 0.75rem;
 
-        /* Terminal Noir specific */
-        --glow-primary: 239 84% 67%;
-        --glow-secondary: 160 84% 39%;
-        --terminal-bg: 220 13% 95%;
-        --terminal-text: 160 84% 30%;
+        /* Custom properties for warm palette */
+        --cream: 40 30% 96%;
+        --terracotta: 12 76% 61%;
+        --sage: 150 20% 40%;
+        --charcoal: 20 10% 8%;
+        --warm-gray: 20 10% 45%;
     }
 
-    .dark {
-        /* Terminal Noir Dark Theme - The Main Event */
-        --background: 240 10% 4%;
-        --foreground: 0 0% 95%;
+    /* Warm Minimalism - Light Mode */
+    .light {
+        /* Warm cream background */
+        --background: 40 30% 96%;
+        --foreground: 20 15% 15%;
 
-        --card: 240 6% 8%;
-        --card-foreground: 0 0% 95%;
+        /* Soft cards */
+        --card: 40 25% 98%;
+        --card-foreground: 20 15% 15%;
 
-        --popover: 240 6% 8%;
-        --popover-foreground: 0 0% 95%;
+        --popover: 40 30% 98%;
+        --popover-foreground: 20 15% 15%;
 
-        --primary: 239 84% 67%;
-        --primary-foreground: 0 0% 100%;
+        /* Terracotta accent on light */
+        --primary: 12 70% 50%;
+        --primary-foreground: 40 30% 98%;
 
-        --secondary: 160 84% 39%;
-        --secondary-foreground: 0 0% 100%;
+        /* Deeper sage for contrast */
+        --secondary: 150 25% 35%;
+        --secondary-foreground: 40 30% 98%;
 
-        --accent: 38 92% 50%;
-        --accent-foreground: 0 0% 0%;
+        --muted: 40 20% 90%;
+        --muted-foreground: 20 10% 45%;
 
-        --muted: 240 4% 16%;
-        --muted-foreground: 240 5% 65%;
+        --accent: 20 10% 20%;
+        --accent-foreground: 40 30% 96%;
 
-        --destructive: 0 62% 30%;
-        --destructive-foreground: 0 0% 98%;
-
-        --border: 240 4% 16%;
-        --input: 240 4% 16%;
-        --ring: 239 84% 67%;
-
-        /* Terminal Noir specific */
-        --glow-primary: 239 84% 67%;
-        --glow-secondary: 160 84% 39%;
-        --terminal-bg: 240 6% 6%;
-        --terminal-text: 160 84% 50%;
+        --border: 40 15% 85%;
+        --input: 40 20% 92%;
+        --ring: 12 70% 50%;
     }
 }
 
@@ -86,158 +92,138 @@
     }
 
     body {
-        @apply bg-background text-foreground;
-        font-feature-settings: "rlig" 1, "calt" 1;
+        @apply bg-background text-foreground antialiased;
+        font-feature-settings: "kern" 1, "liga" 1;
     }
 
-    /* Custom Scrollbar - Terminal Style */
-    ::-webkit-scrollbar {
-        width: 8px;
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
     }
 
-    ::-webkit-scrollbar-track {
-        @apply bg-background;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        @apply bg-primary/50 rounded-full;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        @apply bg-primary;
-    }
-
-    /* Selection */
+    /* Custom selection color */
     ::selection {
-        @apply bg-primary text-primary-foreground;
+        background-color: hsl(var(--primary) / 0.3);
+        color: hsl(var(--foreground));
     }
+}
+
+/* Custom scrollbar - minimal */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
 }
 
 @layer utilities {
-    .heading-xl {
-        @apply text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none;
-    }
 
-    .heading-lg {
-        @apply text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter;
-    }
-
-    .heading-md {
-        @apply text-3xl md:text-4xl font-bold tracking-tight;
-    }
-
+    /* Section spacing - tighter */
     .section-container {
-        @apply py-20 md:py-32;
+        @apply py-16 md:py-20 lg:py-24;
     }
 
-    /* Glassmorphism */
+    /* Warm glass effect */
     .glass {
-        @apply bg-card/80 backdrop-blur-xl border border-white/10;
+        @apply bg-card/60 backdrop-blur-lg;
     }
 
-    .glass-strong {
-        @apply bg-card/90 backdrop-blur-2xl border border-white/20;
+    /* Subtle grain texture overlay */
+    .grain {
+        position: relative;
     }
 
-    /* Glow effects */
-    .glow-primary {
-        box-shadow: 0 0 20px hsl(var(--primary) / 0.3),
-            0 0 40px hsl(var(--primary) / 0.1);
-    }
-
-    .glow-secondary {
-        box-shadow: 0 0 20px hsl(var(--secondary) / 0.3),
-            0 0 40px hsl(var(--secondary) / 0.1);
-    }
-
-    .glow-text {
-        text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
-    }
-
-    /* Grid background */
-    .grid-bg {
-        background-image:
-            linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-        background-size: 50px 50px;
-    }
-
-    /* Terminal card */
-    .terminal-card {
-        @apply bg-[hsl(var(--terminal-bg))] rounded-lg border border-border overflow-hidden;
-    }
-
-    /* Gradient text */
-    .gradient-text {
-        @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
-    }
-
-    /* Animated underline */
-    .animated-underline {
-        @apply relative;
-    }
-
-    .animated-underline::after {
+    .grain::before {
         content: '';
-        @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300;
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 1;
     }
 
-    .animated-underline:hover::after {
-        @apply w-full;
+    /* Warm glow */
+    .glow {
+        box-shadow: 0 0 40px hsl(var(--primary) / 0.15);
     }
 
-    /* Card hover effect */
-    .card-hover {
-        @apply transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10;
+    /* Text gradient */
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--secondary))];
+    }
+
+    /* Hover lift */
+    .hover-lift {
+        @apply transition-transform duration-300 ease-out hover:-translate-y-1;
+    }
+
+    /* Focus ring */
+    .focus-ring {
+        @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
     }
 }
 
-/* Blinking cursor animation */
-@keyframes blink {
-
-    0%,
-    50% {
-        opacity: 1;
-    }
-
-    51%,
-    100% {
-        opacity: 0;
-    }
-}
-
-.cursor-blink {
-    animation: blink 1s step-end infinite;
-}
-
-/* Typing animation helper */
-@keyframes typing {
+/* Animation keyframes */
+@keyframes fade-in-up {
     from {
-        width: 0;
+        opacity: 0;
+        transform: translateY(20px);
     }
 
     to {
-        width: 100%;
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Scan line effect for terminal */
-@keyframes scanline {
-    0% {
-        transform: translateY(-100%);
-    }
+@keyframes float {
 
+    0%,
     100% {
-        transform: translateY(100vh);
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
     }
 }
 
-.scanline::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(transparent 50%,
-            rgba(0, 0, 0, 0.03) 50%);
-    background-size: 100% 4px;
-    pointer-events: none;
+.animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Staggered animation delays */
+.delay-100 {
+    animation-delay: 100ms;
+}
+
+.delay-200 {
+    animation-delay: 200ms;
+}
+
+.delay-300 {
+    animation-delay: 300ms;
+}
+
+.delay-400 {
+    animation-delay: 400ms;
+}
+
+.delay-500 {
+    animation-delay: 500ms;
 }

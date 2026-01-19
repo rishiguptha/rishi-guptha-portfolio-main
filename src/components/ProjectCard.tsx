@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Folder } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 
 interface ProjectCardProps {
   project: {
@@ -10,52 +10,53 @@ interface ProjectCardProps {
     imageUrl: string;
     githubLink?: string;
     liveLink?: string;
-    categories?: string[];
     metrics?: string[];
   };
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
-  const { title, description, technologies, imageUrl, githubLink, liveLink, categories, metrics } = project;
+  const { title, description, technologies, githubLink, liveLink, metrics } = project;
 
   return (
-    <motion.div
-      className="h-full flex flex-col glass rounded-xl overflow-hidden border border-border card-hover group"
-      whileHover={{ y: -8 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+    <motion.article
+      className="group"
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.3 }}
     >
-      {/* Image Section */}
-      <div className="relative h-48 w-full overflow-hidden">
-        <motion.img
-          src={imageUrl || '/placeholder.svg'}
-          alt={title}
-          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-          style={{ filter: 'saturate(0.8)' }}
-          whileHover={{ filter: 'saturate(1)' }}
-        />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-        {/* Category badge */}
-        {categories && categories[0] && (
-          <div className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium bg-primary/90 text-primary-foreground backdrop-blur-sm">
-            {categories[0]}
+      <div className="p-6 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors h-full flex flex-col">
+        {/* Header */}
+        <div className="flex items-start justify-between mb-4">
+          <h3 className="text-lg font-medium group-hover:text-primary transition-colors">
+            {title}
+          </h3>
+          <div className="flex gap-2">
+            {githubLink && (
+              <a
+                href={githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg hover:bg-muted transition-colors"
+                aria-label="View on GitHub"
+              >
+                <Github size={16} className="text-muted-foreground" />
+              </a>
+            )}
+            {liveLink && (
+              <a
+                href={liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg hover:bg-muted transition-colors"
+                aria-label="View live demo"
+              >
+                <ExternalLink size={16} className="text-muted-foreground" />
+              </a>
+            )}
           </div>
-        )}
-
-        {/* Folder icon */}
-        <div className="absolute top-3 left-3 p-2 rounded-lg bg-background/80 backdrop-blur-sm border border-border">
-          <Folder size={16} className="text-primary" />
         </div>
-      </div>
 
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
-          {title}
-        </h3>
-
-        <p className="text-muted-foreground text-sm mb-4 flex-grow line-clamp-3">
+        {/* Description */}
+        <p className="text-sm text-muted-foreground mb-4 flex-grow line-clamp-3">
           {description}
         </p>
 
@@ -63,7 +64,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         {metrics && metrics.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4">
             {metrics.slice(0, 2).map((metric, idx) => (
-              <span key={idx} className="text-xs px-2 py-1 rounded-md bg-secondary/20 text-secondary font-medium">
+              <span
+                key={idx}
+                className="text-xs px-2 py-1 rounded bg-primary/10 text-primary font-medium"
+              >
                 {metric}
               </span>
             ))}
@@ -71,47 +75,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         )}
 
         {/* Technologies */}
-        <div className="flex flex-wrap gap-1.5 mb-6">
+        <div className="flex flex-wrap gap-1.5 pt-4 border-t border-border">
           {technologies.slice(0, 4).map((tech) => (
             <span
               key={tech}
-              className="text-xs px-2 py-1 rounded-md bg-muted/50 text-muted-foreground border border-border"
+              className="text-xs text-muted-foreground"
             >
-              {tech}
+              {tech}{technologies.indexOf(tech) < Math.min(technologies.length, 4) - 1 ? ' ·' : ''}
             </span>
           ))}
           {technologies.length > 4 && (
-            <span className="text-xs px-2 py-1 text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
               +{technologies.length - 4}
             </span>
           )}
         </div>
-
-        {/* Footer Buttons */}
-        <div className="flex gap-3 mt-auto">
-          {githubLink && (
-            <a
-              href={githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-card border border-border hover:border-primary/50 hover:bg-primary/10 transition-all text-sm font-medium"
-            >
-              <Github size={16} /> Code
-            </a>
-          )}
-          {liveLink && (
-            <a
-              href={liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground hover:shadow-glow transition-all text-sm font-medium"
-            >
-              <ExternalLink size={16} /> Demo
-            </a>
-          )}
-        </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 };
 

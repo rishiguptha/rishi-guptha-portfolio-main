@@ -1,132 +1,99 @@
 import React from 'react';
 import SectionTitle from './SectionTitle';
 import { EXPERIENCE, EDUCATION, RESUME_URL } from '@/lib/constants';
-import { Briefcase, GraduationCap, Download, Calendar, MapPin } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { motion } from 'framer-motion';
-import MagneticButton from './MagneticButton';
 
 const Resume: React.FC = () => {
     return (
-        <section id="resume" className="section-container relative overflow-hidden">
-            {/* Background */}
-            <div className="absolute inset-0 grid-bg opacity-20 -z-10" />
-
+        <section id="resume" className="section-container">
             <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
-                    <SectionTitle title="MY JOURNEY" subtitle="Experience & Education" />
-                    <MagneticButton
-                        as="a"
-                        href={RESUME_URL}
-                        download
-                        strength={0.3}
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium shadow-glow hover:shadow-glow-lg transition-all"
-                    >
-                        <Download size={18} /> Download CV
-                    </MagneticButton>
-                </div>
-
-                <div className="grid lg:grid-cols-2 gap-12">
-                    {/* Experience Column */}
-                    <div>
-                        <motion.h3
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="text-xl font-bold mb-8 flex items-center gap-3"
+                <div className="max-w-4xl mx-auto">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">
+                        <SectionTitle title="Experience" />
+                        <a
+                            href={RESUME_URL}
+                            download
+                            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
                         >
-                            <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                                <Briefcase size={20} />
-                            </div>
-                            Experience
-                        </motion.h3>
+                            <Download size={16} /> Download CV
+                        </a>
+                    </div>
 
-                        <div className="space-y-6 relative">
-                            {/* Timeline line */}
-                            <div className="absolute left-[19px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent" />
-
+                    {/* Experience */}
+                    <div className="mb-20">
+                        <div className="space-y-12">
                             {EXPERIENCE.map((job, index) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, x: -30 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.1 }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    className="relative pl-12"
+                                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                                    className="group"
                                 >
-                                    {/* Timeline dot */}
-                                    <div className="absolute left-[11px] top-6 w-4 h-4 rounded-full bg-primary ring-4 ring-background" />
-
-                                    <motion.div
-                                        whileHover={{ x: 4 }}
-                                        className="glass rounded-xl p-6 border border-border card-hover"
-                                    >
-                                        <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-3">
-                                            <div>
-                                                <h4 className="font-bold text-lg">{job.title}</h4>
-                                                <p className="text-primary font-medium">{job.company}</p>
-                                            </div>
-                                            <span className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground bg-muted/50 px-3 py-1 rounded-full">
-                                                <Calendar size={12} />
+                                    <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
+                                        {/* Date */}
+                                        <div className="md:w-32 shrink-0">
+                                            <span className="text-sm text-muted-foreground font-mono">
                                                 {job.date}
                                             </span>
                                         </div>
-                                        <p className="text-sm text-muted-foreground leading-relaxed">
-                                            {job.description}
-                                        </p>
-                                    </motion.div>
+
+                                        {/* Content */}
+                                        <div className="flex-1 pb-12 border-b border-border last:border-0">
+                                            <h3 className="text-lg font-medium mb-1 group-hover:text-primary transition-colors">
+                                                {job.title}
+                                            </h3>
+                                            <p className="text-muted-foreground mb-4">
+                                                {job.company} · {job.location}
+                                            </p>
+                                            <p className="text-sm text-muted-foreground leading-relaxed">
+                                                {job.description}
+                                            </p>
+                                            {job.highlights && (
+                                                <div className="flex flex-wrap gap-2 mt-4">
+                                                    {job.highlights.map((highlight, idx) => (
+                                                        <span
+                                                            key={idx}
+                                                            className="text-xs px-2 py-1 rounded bg-primary/10 text-primary"
+                                                        >
+                                                            {highlight}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
 
-                    {/* Education Column */}
+                    {/* Education */}
                     <div>
-                        <motion.h3
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="text-xl font-bold mb-8 flex items-center gap-3"
-                        >
-                            <div className="p-2 rounded-lg bg-secondary/10 text-secondary">
-                                <GraduationCap size={20} />
-                            </div>
+                        <h3 className="text-sm text-muted-foreground uppercase tracking-widest mb-8">
                             Education
-                        </motion.h3>
-
-                        <div className="space-y-6 relative">
-                            {/* Timeline line */}
-                            <div className="absolute left-[19px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-secondary to-accent" />
-
+                        </h3>
+                        <div className="space-y-8">
                             {EDUCATION.map((edu, index) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, x: -30 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.1 }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    className="relative pl-12"
+                                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                                    className="flex flex-col md:flex-row md:items-start gap-4 md:gap-8"
                                 >
-                                    {/* Timeline dot */}
-                                    <div className="absolute left-[11px] top-6 w-4 h-4 rounded-full bg-secondary ring-4 ring-background" />
-
-                                    <motion.div
-                                        whileHover={{ x: 4 }}
-                                        className="glass rounded-xl p-6 border border-border card-hover"
-                                    >
-                                        <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-3">
-                                            <div>
-                                                <h4 className="font-bold text-lg">{edu.degree}</h4>
-                                                <p className="text-secondary font-medium">{edu.institution}</p>
-                                            </div>
-                                            <span className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground bg-muted/50 px-3 py-1 rounded-full">
-                                                <Calendar size={12} />
-                                                {edu.date}
-                                            </span>
-                                        </div>
-                                        <p className="text-sm text-muted-foreground leading-relaxed">
-                                            {edu.description}
-                                        </p>
-                                    </motion.div>
+                                    <div className="md:w-32 shrink-0">
+                                        <span className="text-sm text-muted-foreground font-mono">
+                                            {edu.date}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h4 className="text-lg font-medium mb-1">{edu.degree}</h4>
+                                        <p className="text-muted-foreground">{edu.institution}</p>
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>

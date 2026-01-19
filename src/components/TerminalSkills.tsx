@@ -11,24 +11,23 @@ interface TerminalLine {
 
 const TerminalSkills: React.FC = () => {
     const [displayedLines, setDisplayedLines] = useState<TerminalLine[]>([]);
-    const [currentLineIndex, setCurrentLineIndex] = useState(0);
     const [isTyping, setIsTyping] = useState(true);
     const [currentText, setCurrentText] = useState('');
     const terminalRef = useRef<HTMLDivElement>(null);
     const hasStarted = useRef(false);
 
     const lines: TerminalLine[] = [
-        { type: 'comment', text: '# Welcome to my terminal — let\'s see what I can do 🚀', delay: 50 },
-        { type: 'command', text: 'cat skills.json | jq \'.languages\'', delay: 30 },
-        { type: 'output', text: `["${TECHNICAL_SKILLS['Languages'].join('", "')}"]`, delay: 10 },
-        { type: 'command', text: 'pip list --installed | grep -E "torch|tensorflow"', delay: 30 },
-        { type: 'output', text: TECHNICAL_SKILLS['ML & AI'].slice(0, 4).join(' • '), delay: 10 },
-        { type: 'output', text: TECHNICAL_SKILLS['ML & AI'].slice(4).join(' • '), delay: 10 },
-        { type: 'command', text: 'aws configure list-profiles && gcloud config list', delay: 30 },
-        { type: 'output', text: TECHNICAL_SKILLS['Cloud & DevOps'].join(' | '), delay: 10 },
-        { type: 'command', text: 'airflow dags list --output table', delay: 30 },
-        { type: 'output', text: TECHNICAL_SKILLS['Data & Analytics'].join(' → '), delay: 10 },
-        { type: 'comment', text: '# Ready to build something awesome? Let\'s connect! 💡', delay: 50 },
+        { type: 'comment', text: '# Welcome to my terminal — let\'s see what I can do 🚀', delay: 40 },
+        { type: 'command', text: 'cat skills.json | jq \'.languages\'', delay: 25 },
+        { type: 'output', text: `["${TECHNICAL_SKILLS['Languages'].join('", "')}"]`, delay: 8 },
+        { type: 'command', text: 'pip list --installed | grep -E "torch|tensorflow"', delay: 25 },
+        { type: 'output', text: TECHNICAL_SKILLS['ML & AI'].slice(0, 4).join(' • '), delay: 8 },
+        { type: 'output', text: TECHNICAL_SKILLS['ML & AI'].slice(4).join(' • '), delay: 8 },
+        { type: 'command', text: 'aws configure list-profiles && gcloud config list', delay: 25 },
+        { type: 'output', text: TECHNICAL_SKILLS['Cloud & DevOps'].join(' | '), delay: 8 },
+        { type: 'command', text: 'airflow dags list --output table', delay: 25 },
+        { type: 'output', text: TECHNICAL_SKILLS['Data & Analytics'].join(' → '), delay: 8 },
+        { type: 'comment', text: '# Ready to build something awesome? Let\'s connect! 💡', delay: 40 },
     ];
 
     useEffect(() => {
@@ -73,7 +72,7 @@ const TerminalSkills: React.FC = () => {
                     setDisplayedLines(prev => [...prev, line]);
                     setCurrentText('');
                     lineIdx++;
-                    setTimeout(typeNextLine, 300);
+                    setTimeout(typeNextLine, 250);
                 }
             };
 
@@ -83,19 +82,20 @@ const TerminalSkills: React.FC = () => {
         typeNextLine();
     };
 
+    // Warm color scheme for terminal
     const getLineColor = (type: string) => {
         switch (type) {
-            case 'command': return 'text-secondary';
-            case 'output': return 'text-foreground/80';
-            case 'comment': return 'text-muted-foreground italic';
-            default: return 'text-foreground';
+            case 'command': return 'text-amber-400'; // Warm gold for commands
+            case 'output': return 'text-stone-300'; // Warm off-white for output
+            case 'comment': return 'text-stone-500 italic'; // Muted for comments
+            default: return 'text-stone-300';
         }
     };
 
     const getLinePrefix = (type: string) => {
         switch (type) {
             case 'command': return <span className="text-primary mr-2">❯</span>;
-            case 'output': return <span className="text-muted-foreground mr-2">→</span>;
+            case 'output': return <span className="text-stone-600 mr-2">→</span>;
             case 'comment': return null;
             default: return null;
         }
@@ -110,17 +110,17 @@ const TerminalSkills: React.FC = () => {
             viewport={{ once: true }}
             className="w-full max-w-4xl mx-auto"
         >
-            {/* Terminal Window */}
-            <div className="rounded-lg overflow-hidden border border-border shadow-2xl shadow-primary/5">
-                {/* Terminal Header */}
-                <div className="bg-card flex items-center gap-2 px-4 py-3 border-b border-border">
+            {/* Terminal Window - Warm Theme */}
+            <div className="rounded-xl overflow-hidden border border-stone-700/50 shadow-2xl shadow-primary/10 bg-stone-900/80 backdrop-blur-sm">
+                {/* Terminal Header - Warm styled */}
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-stone-700/50 bg-stone-800/50">
                     <div className="flex gap-2">
-                        <div className="w-3 h-3 rounded-full bg-red-500" />
-                        <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                        <div className="w-3 h-3 rounded-full bg-green-500" />
+                        <div className="w-3 h-3 rounded-full bg-primary/80" />
+                        <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                        <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
                     </div>
                     <div className="flex-1 text-center">
-                        <span className="text-xs font-mono text-muted-foreground flex items-center justify-center gap-2">
+                        <span className="text-xs font-mono text-stone-500 flex items-center justify-center gap-2">
                             <Terminal size={12} />
                             rishi@portfolio ~ /skills
                         </span>
@@ -128,7 +128,7 @@ const TerminalSkills: React.FC = () => {
                 </div>
 
                 {/* Terminal Body */}
-                <div className="bg-background p-6 font-mono text-sm min-h-[300px] max-h-[400px] overflow-y-auto scanline">
+                <div className="p-6 font-mono text-sm min-h-[280px] max-h-[350px] overflow-y-auto">
                     <AnimatePresence>
                         {displayedLines.map((line, index) => (
                             <motion.div
@@ -148,15 +148,15 @@ const TerminalSkills: React.FC = () => {
                         <div className={`mb-2 ${getLineColor(lines[displayedLines.length]?.type || 'command')}`}>
                             {getLinePrefix(lines[displayedLines.length]?.type || 'command')}
                             <span>{currentText}</span>
-                            <span className="cursor-blink ml-0.5 inline-block w-2 h-4 bg-primary" />
+                            <span className="ml-0.5 inline-block w-2 h-4 bg-primary animate-pulse" />
                         </div>
                     )}
 
                     {/* Waiting cursor */}
                     {!isTyping && (
-                        <div className="text-secondary flex items-center">
+                        <div className="flex items-center">
                             <span className="text-primary mr-2">❯</span>
-                            <span className="cursor-blink inline-block w-2 h-4 bg-primary" />
+                            <span className="inline-block w-2 h-4 bg-primary animate-pulse" />
                         </div>
                     )}
                 </div>
@@ -168,7 +168,7 @@ const TerminalSkills: React.FC = () => {
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
                 viewport={{ once: true }}
-                className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4"
+                className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4"
             >
                 {Object.entries(TECHNICAL_SKILLS).map(([category, skills], index) => (
                     <motion.div
@@ -177,24 +177,24 @@ const TerminalSkills: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                         viewport={{ once: true }}
-                        className="glass rounded-lg p-4 card-hover"
+                        className="rounded-lg p-4 bg-card/50 border border-border hover:border-primary/30 transition-colors"
                     >
-                        <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <h4 className="text-xs font-semibold text-primary uppercase tracking-wider mb-3 flex items-center gap-2">
                             <ChevronRight size={12} />
                             {category}
                         </h4>
                         <div className="flex flex-wrap gap-1.5">
-                            {skills.slice(0, 6).map((skill) => (
+                            {skills.slice(0, 5).map((skill) => (
                                 <span
                                     key={skill}
-                                    className="text-xs px-2 py-1 rounded-md bg-primary/10 text-foreground/80 border border-primary/20"
+                                    className="text-xs px-2 py-1 rounded bg-stone-800/50 text-stone-300 border border-stone-700/50"
                                 >
                                     {skill}
                                 </span>
                             ))}
-                            {skills.length > 6 && (
+                            {skills.length > 5 && (
                                 <span className="text-xs px-2 py-1 text-muted-foreground">
-                                    +{skills.length - 6} more
+                                    +{skills.length - 5}
                                 </span>
                             )}
                         </div>
