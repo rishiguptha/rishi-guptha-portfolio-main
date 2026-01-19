@@ -3,28 +3,28 @@ import { motion } from 'framer-motion';
 
 interface SectionTitleProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
+  centered?: boolean;
 }
 
-const SectionTitle: React.FC<SectionTitleProps> = ({ title, subtitle }) => {
+const SectionTitle: React.FC<SectionTitleProps> = ({ title, subtitle, centered = false }) => {
   return (
-    <motion.div 
-      className="mb-16 relative inline-block"
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className={`mb-12 ${centered ? 'text-center' : ''}`}
     >
-      {/* Decorative block behind */}
-      <div className="absolute top-0 left-0 w-full h-full bg-secondary transform translate-x-2 translate-y-2 -z-10 border-2 border-black hidden md:block"></div>
-      
-      <div className="bg-white dark:bg-card border-2 border-black dark:border-white p-4 md:p-6 inline-block">
-        <h2 className="text-sm md:text-base font-black uppercase tracking-widest text-primary mb-1 border-b-2 border-black dark:border-white pb-1 inline-block">
-          {title}
-        </h2>
-        <p className="text-3xl md:text-5xl font-black text-foreground uppercase mt-2 leading-none">
+      {subtitle && (
+        <span className="text-primary font-mono text-sm uppercase tracking-widest mb-2 block">
           {subtitle}
-        </p>
-      </div>
+        </span>
+      )}
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+        {title}
+      </h2>
+      <div className={`mt-4 h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full ${centered ? 'mx-auto' : ''}`} />
     </motion.div>
   );
 };

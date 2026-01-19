@@ -1,66 +1,76 @@
 import React from 'react';
 import SectionTitle from './SectionTitle';
 import { EXPERIENCE, EDUCATION, RESUME_URL } from '@/lib/constants';
-import { Briefcase, GraduationCap, Download } from 'lucide-react';
+import { Briefcase, GraduationCap, Download, Calendar, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
+import MagneticButton from './MagneticButton';
 
 const Resume: React.FC = () => {
     return (
-        <section id="resume" className="section-container bg-white dark:bg-background border-t-4 border-black dark:border-white">
+        <section id="resume" className="section-container relative overflow-hidden">
+            {/* Background */}
+            <div className="absolute inset-0 grid-bg opacity-20 -z-10" />
+
             <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
                     <SectionTitle title="MY JOURNEY" subtitle="Experience & Education" />
-                    <motion.a
+                    <MagneticButton
+                        as="a"
                         href={RESUME_URL}
                         download
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        strength={0.3}
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium shadow-glow hover:shadow-glow-lg transition-all"
                     >
-                        <Button className="mb-12 md:mb-0">
-                            <Download className="mr-2 h-5 w-5" /> DOWNLOAD CV
-                        </Button>
-                    </motion.a>
+                        <Download size={18} /> Download CV
+                    </MagneticButton>
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-16">
+                <div className="grid lg:grid-cols-2 gap-12">
                     {/* Experience Column */}
                     <div>
                         <motion.h3
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="text-2xl font-black uppercase mb-8 flex items-center gap-3 border-b-4 border-black dark:border-white pb-2"
+                            className="text-xl font-bold mb-8 flex items-center gap-3"
                         >
-                            <Briefcase className="w-8 h-8" /> Experience
+                            <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                                <Briefcase size={20} />
+                            </div>
+                            Experience
                         </motion.h3>
-                        <div className="space-y-10 border-l-4 border-black dark:border-white ml-3 pl-8 py-2">
+
+                        <div className="space-y-6 relative">
+                            {/* Timeline line */}
+                            <div className="absolute left-[19px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent" />
+
                             {EXPERIENCE.map((job, index) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, x: -50 }}
+                                    initial={{ opacity: 0, x: -30 }}
                                     whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                                    transition={{ delay: index * 0.1 }}
                                     viewport={{ once: true }}
-                                    className="relative"
+                                    className="relative pl-12"
                                 >
-                                    {/* Timeline Marker */}
-                                    <div className="absolute -left-[46px] top-0 w-6 h-6 bg-secondary border-2 border-black dark:border-white rounded-none"></div>
+                                    {/* Timeline dot */}
+                                    <div className="absolute left-[11px] top-6 w-4 h-4 rounded-full bg-primary ring-4 ring-background" />
 
                                     <motion.div
-                                        whileHover={{ x: 4, y: 4, boxShadow: "0px 0px 0px 0px rgba(var(--shadow-color), 0)" }}
-                                        className="bg-white dark:bg-card border-2 border-black dark:border-white p-6 shadow-neo transition-all"
+                                        whileHover={{ x: 4 }}
+                                        className="glass rounded-xl p-6 border border-border card-hover"
                                     >
-                                        <div className="flex flex-col sm:flex-row justify-between items-start mb-4 gap-2">
+                                        <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-3">
                                             <div>
-                                                <h4 className="text-xl font-bold uppercase">{job.title}</h4>
-                                                <span className="text-primary font-black">{job.company}</span>
+                                                <h4 className="font-bold text-lg">{job.title}</h4>
+                                                <p className="text-primary font-medium">{job.company}</p>
                                             </div>
-                                            <span className="text-xs font-bold bg-black text-white px-2 py-1 whitespace-nowrap">
+                                            <span className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground bg-muted/50 px-3 py-1 rounded-full">
+                                                <Calendar size={12} />
                                                 {job.date}
                                             </span>
                                         </div>
-                                        <p className="text-muted-foreground text-sm font-medium leading-relaxed border-t-2 border-dotted border-gray-300 pt-4 mt-2">
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
                                             {job.description}
                                         </p>
                                     </motion.div>
@@ -75,37 +85,45 @@ const Resume: React.FC = () => {
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="text-2xl font-black uppercase mb-8 flex items-center gap-3 border-b-4 border-black dark:border-white pb-2"
+                            className="text-xl font-bold mb-8 flex items-center gap-3"
                         >
-                            <GraduationCap className="w-8 h-8" /> Education
+                            <div className="p-2 rounded-lg bg-secondary/10 text-secondary">
+                                <GraduationCap size={20} />
+                            </div>
+                            Education
                         </motion.h3>
-                        <div className="space-y-10 border-l-4 border-black dark:border-white ml-3 pl-8 py-2">
+
+                        <div className="space-y-6 relative">
+                            {/* Timeline line */}
+                            <div className="absolute left-[19px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-secondary to-accent" />
+
                             {EDUCATION.map((edu, index) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, x: -50 }}
+                                    initial={{ opacity: 0, x: -30 }}
                                     whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                                    transition={{ delay: index * 0.1 }}
                                     viewport={{ once: true }}
-                                    className="relative"
+                                    className="relative pl-12"
                                 >
-                                    {/* Timeline Marker */}
-                                    <div className="absolute -left-[46px] top-0 w-6 h-6 bg-primary border-2 border-black dark:border-white rounded-none"></div>
+                                    {/* Timeline dot */}
+                                    <div className="absolute left-[11px] top-6 w-4 h-4 rounded-full bg-secondary ring-4 ring-background" />
 
                                     <motion.div
-                                        whileHover={{ x: 4, y: 4, boxShadow: "0px 0px 0px 0px rgba(var(--shadow-color), 0)" }}
-                                        className="bg-white dark:bg-card border-2 border-black dark:border-white p-6 shadow-neo transition-all"
+                                        whileHover={{ x: 4 }}
+                                        className="glass rounded-xl p-6 border border-border card-hover"
                                     >
-                                        <div className="flex flex-col sm:flex-row justify-between items-start mb-4 gap-2">
+                                        <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-3">
                                             <div>
-                                                <h4 className="text-xl font-bold uppercase">{edu.degree}</h4>
-                                                <span className="text-primary font-black">{edu.institution}</span>
+                                                <h4 className="font-bold text-lg">{edu.degree}</h4>
+                                                <p className="text-secondary font-medium">{edu.institution}</p>
                                             </div>
-                                            <span className="text-xs font-bold bg-black text-white px-2 py-1 whitespace-nowrap">
+                                            <span className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground bg-muted/50 px-3 py-1 rounded-full">
+                                                <Calendar size={12} />
                                                 {edu.date}
                                             </span>
                                         </div>
-                                        <p className="text-muted-foreground text-sm font-medium leading-relaxed border-t-2 border-dotted border-gray-300 pt-4 mt-2">
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
                                             {edu.description}
                                         </p>
                                     </motion.div>

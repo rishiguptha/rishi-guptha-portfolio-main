@@ -4,69 +4,79 @@
 
 @layer base {
     :root {
-        --background: 0 0% 100%;
-        --foreground: 0 0% 0%;
+        /* Terminal Noir Light Theme */
+        --background: 210 40% 98%;
+        --foreground: 222 47% 11%;
 
         --card: 0 0% 100%;
-        --card-foreground: 0 0% 0%;
+        --card-foreground: 222 47% 11%;
 
         --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 0%;
+        --popover-foreground: 222 47% 11%;
 
-        --primary: 0 0% 0%;
+        --primary: 239 84% 67%;
         --primary-foreground: 0 0% 100%;
 
-        --secondary: 47 100% 50%;
-        --secondary-foreground: 0 0% 0%;
+        --secondary: 160 84% 39%;
+        --secondary-foreground: 0 0% 100%;
 
-        --muted: 0 0% 96.1%;
-        --muted-foreground: 0 0% 45.1%;
+        --accent: 38 92% 50%;
+        --accent-foreground: 0 0% 0%;
 
-        --accent: 0 0% 96.1%;
-        --accent-foreground: 0 0% 9%;
+        --muted: 215 16% 47%;
+        --muted-foreground: 215 16% 47%;
 
-        --destructive: 0 84.2% 60.2%;
+        --destructive: 0 84% 60%;
         --destructive-foreground: 0 0% 98%;
 
-        --border: 0 0% 0%;
-        --input: 0 0% 0%;
-        --ring: 0 0% 0%;
+        --border: 214 32% 91%;
+        --input: 214 32% 91%;
+        --ring: 239 84% 67%;
 
-        --radius: 0px;
+        --radius: 0.75rem;
 
-        --shadow-color: 0, 0, 0;
+        /* Terminal Noir specific */
+        --glow-primary: 239 84% 67%;
+        --glow-secondary: 160 84% 39%;
+        --terminal-bg: 220 13% 95%;
+        --terminal-text: 160 84% 30%;
     }
 
     .dark {
-        --background: 0 0% 0%;
-        --foreground: 0 0% 100%;
+        /* Terminal Noir Dark Theme - The Main Event */
+        --background: 240 10% 4%;
+        --foreground: 0 0% 95%;
 
-        --card: 0 0% 0%;
-        --card-foreground: 0 0% 100%;
+        --card: 240 6% 8%;
+        --card-foreground: 0 0% 95%;
 
-        --popover: 0 0% 0%;
-        --popover-foreground: 0 0% 100%;
+        --popover: 240 6% 8%;
+        --popover-foreground: 0 0% 95%;
 
-        --primary: 0 0% 100%;
-        --primary-foreground: 0 0% 0%;
+        --primary: 239 84% 67%;
+        --primary-foreground: 0 0% 100%;
 
-        --secondary: 47 100% 50%;
-        --secondary-foreground: 0 0% 0%;
+        --secondary: 160 84% 39%;
+        --secondary-foreground: 0 0% 100%;
 
-        --muted: 0 0% 14.9%;
-        --muted-foreground: 0 0% 63.9%;
+        --accent: 38 92% 50%;
+        --accent-foreground: 0 0% 0%;
 
-        --accent: 0 0% 14.9%;
-        --accent-foreground: 0 0% 98%;
+        --muted: 240 4% 16%;
+        --muted-foreground: 240 5% 65%;
 
-        --destructive: 0 62.8% 30.6%;
+        --destructive: 0 62% 30%;
         --destructive-foreground: 0 0% 98%;
 
-        --border: 0 0% 100%;
-        --input: 0 0% 100%;
-        --ring: 0 0% 100%;
+        --border: 240 4% 16%;
+        --input: 240 4% 16%;
+        --ring: 239 84% 67%;
 
-        --shadow-color: 255, 255, 255;
+        /* Terminal Noir specific */
+        --glow-primary: 239 84% 67%;
+        --glow-secondary: 160 84% 39%;
+        --terminal-bg: 240 6% 6%;
+        --terminal-text: 160 84% 50%;
     }
 }
 
@@ -80,17 +90,17 @@
         font-feature-settings: "rlig" 1, "calt" 1;
     }
 
-    /* Custom Scrollbar */
+    /* Custom Scrollbar - Terminal Style */
     ::-webkit-scrollbar {
-        width: 12px;
+        width: 8px;
     }
 
     ::-webkit-scrollbar-track {
-        @apply bg-secondary/20;
+        @apply bg-background;
     }
 
     ::-webkit-scrollbar-thumb {
-        @apply bg-black dark:bg-white border-2 border-transparent bg-clip-content;
+        @apply bg-primary/50 rounded-full;
     }
 
     ::-webkit-scrollbar-thumb:hover {
@@ -99,7 +109,7 @@
 
     /* Selection */
     ::selection {
-        @apply bg-secondary text-black;
+        @apply bg-primary text-primary-foreground;
     }
 }
 
@@ -120,7 +130,114 @@
         @apply py-20 md:py-32;
     }
 
-    .neo-brutal-box {
-        @apply bg-white dark:bg-black border-2 border-black dark:border-white shadow-neo transition-all hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none;
+    /* Glassmorphism */
+    .glass {
+        @apply bg-card/80 backdrop-blur-xl border border-white/10;
     }
+
+    .glass-strong {
+        @apply bg-card/90 backdrop-blur-2xl border border-white/20;
+    }
+
+    /* Glow effects */
+    .glow-primary {
+        box-shadow: 0 0 20px hsl(var(--primary) / 0.3),
+            0 0 40px hsl(var(--primary) / 0.1);
+    }
+
+    .glow-secondary {
+        box-shadow: 0 0 20px hsl(var(--secondary) / 0.3),
+            0 0 40px hsl(var(--secondary) / 0.1);
+    }
+
+    .glow-text {
+        text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+    }
+
+    /* Grid background */
+    .grid-bg {
+        background-image:
+            linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+    }
+
+    /* Terminal card */
+    .terminal-card {
+        @apply bg-[hsl(var(--terminal-bg))] rounded-lg border border-border overflow-hidden;
+    }
+
+    /* Gradient text */
+    .gradient-text {
+        @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+    }
+
+    /* Animated underline */
+    .animated-underline {
+        @apply relative;
+    }
+
+    .animated-underline::after {
+        content: '';
+        @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300;
+    }
+
+    .animated-underline:hover::after {
+        @apply w-full;
+    }
+
+    /* Card hover effect */
+    .card-hover {
+        @apply transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10;
+    }
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+.cursor-blink {
+    animation: blink 1s step-end infinite;
+}
+
+/* Typing animation helper */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+/* Scan line effect for terminal */
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+.scanline::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%,
+            rgba(0, 0, 0, 0.03) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
 }

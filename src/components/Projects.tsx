@@ -3,8 +3,7 @@ import SectionTitle from './SectionTitle';
 import ProjectCard from './ProjectCard';
 import { PROJECTS } from '@/lib/constants';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Filter } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { Search, Filter, X } from 'lucide-react';
 
 const Projects: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -34,7 +33,10 @@ const Projects: React.FC = () => {
   }, [selectedCategory, searchTerm]);
 
   return (
-    <section id="projects" className="section-container bg-secondary/10 border-t-4 border-black dark:border-white">
+    <section id="projects" className="section-container relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 grid-bg opacity-30 -z-10" />
+
       <div className="container mx-auto px-6">
         <SectionTitle title="MY WORK" subtitle="Featured Projects" />
 
@@ -43,39 +45,58 @@ const Projects: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto mb-16 space-y-8 bg-white dark:bg-card border-2 border-black dark:border-white p-6 shadow-neo"
+          className="max-w-3xl mx-auto mb-12"
         >
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black dark:text-white w-5 h-5" />
+          {/* Search input */}
+          <div className="relative mb-6">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
             <input
               type="text"
-              placeholder="Search projects..."
+              placeholder="Search projects by name, tech, or description..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-background border-2 border-black dark:border-white focus:outline-none focus:ring-2 focus:ring-primary font-mono text-sm"
+              className="w-full pl-12 pr-12 py-4 rounded-xl glass border border-border focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-medium"
             />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X size={18} />
+              </button>
+            )}
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3">
+          {/* Category filters */}
+          <div className="flex flex-wrap justify-center gap-2">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 font-bold text-sm border-2 border-black dark:border-white transition-all duration-200 ${selectedCategory === category
-                    ? 'bg-primary text-white shadow-neo-sm'
-                    : 'bg-white dark:bg-black text-black dark:text-white hover:bg-secondary'
+                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${selectedCategory === category
+                    ? 'bg-primary text-primary-foreground shadow-glow'
+                    : 'glass border border-border hover:border-primary/50'
                   }`}
               >
-                {category.toUpperCase()}
+                {category}
               </button>
             ))}
           </div>
         </motion.div>
 
+        {/* Results count */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center text-sm text-muted-foreground mb-8"
+        >
+          Showing {filteredProjects.length} of {PROJECTS.length} projects
+        </motion.p>
+
         {/* Grid with Layout Animation */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.length > 0 ? (
@@ -83,9 +104,9 @@ const Projects: React.FC = () => {
                 <motion.div
                   layout
                   key={project.title}
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
                 >
                   <ProjectCard project={project} />
@@ -95,15 +116,21 @@ const Projects: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="col-span-full text-center py-16 border-2 border-dashed border-gray-400"
+                className="col-span-full text-center py-16"
               >
-                <h3 className="text-xl font-bold uppercase mb-2">No projects found</h3>
-                <button
-                  onClick={() => { setSelectedCategory('All'); setSearchTerm(''); }}
-                  className="underline font-bold text-primary hover:text-secondary-foreground transition-colors"
-                >
-                  Reset Filters
-                </button>
+                <div className="glass rounded-2xl p-12 border border-border max-w-md mx-auto">
+                  <div className="text-6xl mb-4">🔍</div>
+                  <h3 className="text-xl font-bold mb-2">No projects found</h3>
+                  <p className="text-muted-foreground mb-6">
+                    Try adjusting your search or filters
+                  </p>
+                  <button
+                    onClick={() => { setSelectedCategory('All'); setSearchTerm(''); }}
+                    className="px-6 py-2 rounded-lg bg-primary text-primary-foreground font-medium hover:shadow-glow transition-all"
+                  >
+                    Clear Filters
+                  </button>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
