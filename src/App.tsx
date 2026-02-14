@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 
 import CustomCursor from "@/components/CustomCursor";
 import ScrollToTop from "@/components/ScrollToTop";
+import KonamiCode from "@/components/KonamiCode";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ const App = () => (
     <TooltipProvider>
       <CustomCursor />
       <ScrollToTop />
+      <KonamiCode />
       <AnimatePresence mode="wait">
         <motion.div
           initial={{ opacity: 0 }}

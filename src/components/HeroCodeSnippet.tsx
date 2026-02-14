@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const HeroCodeSnippet: React.FC = () => {
     const codeLines = [
-        { indent: 0, content: 'class', highlight: 'RishiGuptha', suffix: ':' },
+        { indent: 0, content: 'class ', highlight: 'RishiGuptha', suffix: ':' },
         { indent: 1, content: 'role = ', highlight: '"AI & Data Engineer"', suffix: '' },
         { indent: 1, content: 'stack = ', highlight: '["Python", "PyTorch", "AWS", "Spark"]', suffix: '' },
         { indent: 1, content: '', highlight: '', suffix: '' },
