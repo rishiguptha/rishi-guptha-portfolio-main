@@ -85,7 +85,7 @@ const Index = () => {
                   download
                   className="px-6 py-3 rounded-lg border border-border hover:border-primary/50 hover:bg-card/50 font-medium transition-all"
                 >
-                  Download CV
+                  Download Resume
                 </a>
               </motion.div>
 
@@ -97,7 +97,7 @@ const Index = () => {
                 className="flex flex-wrap gap-8 pt-6 border-t border-border"
               >
                 {[
-                  { value: '3+', label: 'Years experience' },
+                  { value: '1.5+', label: 'Years experience' },
                   { value: '10+', label: 'Pipelines shipped' },
                   { value: '80%', label: 'Time saved (Nevara)' },
                 ].map((stat, idx) => (

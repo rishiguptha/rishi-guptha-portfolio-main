@@ -16,7 +16,7 @@ const Resume: React.FC = () => {
                             download
                             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
                         >
-                            <Download size={16} /> Download CV
+                            <Download size={16} /> Download Resume
                         </a>
                     </div>
 
