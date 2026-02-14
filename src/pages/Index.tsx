@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import About from '@/components/About';
 import Resume from '@/components/Resume';
@@ -8,11 +7,14 @@ import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import ScrollProgress from '@/components/ScrollProgress';
 import HeroCodeSnippet from '@/components/HeroCodeSnippet';
+import CountUp from '@/components/CountUp';
 import { useTheme } from '@/hooks/useTheme';
+import useScrollState from '@/hooks/useScrollState';
 import { RESUME_URL, CONTACT_INFO } from '@/lib/constants';
 
 const Index = () => {
   useTheme();
+  const { scrolled } = useScrollState();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -54,26 +56,32 @@ const Index = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4"
               >
-                <span className="block text-foreground">Rishi Guptha</span>
-                <span className="block text-muted-foreground/60">Mankala</span>
+                Rishi Guptha
               </motion.h1>
 
-              {/* Subtitle */}
+              {/* Role */}
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg md:text-xl text-muted-foreground max-w-lg mb-8 leading-relaxed"
+                className="text-lg md:text-xl text-muted-foreground max-w-lg mb-3 leading-relaxed"
               >
                 I build <span className="text-primary font-medium">data systems</span> and{' '}
                 <span className="text-primary font-medium">AI products</span> that scale.
-                <br />
-                <span className="text-base opacity-70">
-                  MS in Data Science · Ex-Nevara AI, Kimberly-Clark
-                </span>
               </motion.p>
+
+              {/* Credentials */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.25 }}
+                className="flex items-center gap-2 text-sm text-muted-foreground mb-8"
+              >
+                <span className="inline-block w-8 h-px bg-border" />
+                MS in Data Science · Ex-Nevara AI, Kimberly-Clark
+              </motion.div>
 
               {/* CTA buttons */}
               <motion.div
@@ -97,23 +105,31 @@ const Index = () => {
                 </a>
               </motion.div>
 
-              {/* Quick stats */}
+              {/* Quick stats with count-up */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="flex flex-wrap gap-8 pt-6 border-t border-border"
               >
-                {[
-                  { value: '3', label: 'Engineering roles' },
-                  { value: '10+', label: 'Pipelines shipped' },
-                  { value: '80%', label: 'Time saved (Nevara)' },
-                ].map((stat, idx) => (
-                  <div key={idx}>
-                    <div className="text-2xl font-bold text-foreground">{stat.value}</div>
-                    <div className="text-xs text-muted-foreground">{stat.label}</div>
+                <div>
+                  <div className="text-2xl font-bold text-foreground">
+                    <CountUp end={3} duration={1.2} />
                   </div>
-                ))}
+                  <div className="text-xs text-muted-foreground">Engineering roles</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-foreground">
+                    <CountUp end={10} suffix="+" duration={1.5} />
+                  </div>
+                  <div className="text-xs text-muted-foreground">Pipelines shipped</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-foreground">
+                    <CountUp end={80} suffix="%" duration={1.8} />
+                  </div>
+                  <div className="text-xs text-muted-foreground">Time saved (Nevara)</div>
+                </div>
               </motion.div>
             </div>
 
@@ -129,19 +145,22 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator - fades on scroll */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          animate={{ opacity: scrolled ? 0 : 0.6 }}
+          transition={{ duration: 0.4, delay: scrolled ? 0 : 1.2 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
         >
+          <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            Scroll
+          </span>
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ArrowDown className="w-5 h-5 text-muted-foreground" />
-          </motion.div>
+            className="w-px h-8 bg-muted-foreground/50"
+            initial={{ scaleY: 0, originY: 0 }}
+            animate={{ scaleY: 1 }}
+            transition={{ duration: 0.8, delay: 1.4 }}
+          />
         </motion.div>
       </section>
 
