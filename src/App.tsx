@@ -1,4 +1,3 @@
-import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -26,7 +25,6 @@ const App = () => (
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Toaster />
           <Sonner />
           <BrowserRouter>
             <Routes>

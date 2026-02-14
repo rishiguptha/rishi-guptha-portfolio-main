@@ -111,7 +111,8 @@ export const PROJECTS = [
     categories: ['Data Engineering', 'Machine Learning', 'Distributed Systems'],
     readme: 'High-performance distributed clustering for spatial-temporal data.',
     githubLink: 'https://github.com/rishiguptha',
-    metrics: ['3.9M rows processed', 'Distributed DBSCAN', 'Parallel mpi4py']
+    metrics: ['3.9M rows processed', 'Distributed DBSCAN', 'Parallel mpi4py'],
+    featured: true
   },
   {
     title: 'NutriSmart: Semantic Search Engine',
@@ -121,7 +122,8 @@ export const PROJECTS = [
     categories: ['Machine Learning', 'NLP', 'Cloud Computing'],
     readme: 'Production RAG pipeline for semantic health research search.',
     githubLink: 'https://github.com/rishiguptha/nutismart_rag_project',
-    metrics: ['1M+ tokens indexed', 'Low-latency semantic search', 'Dockerized deployment']
+    metrics: ['1M+ tokens indexed', 'Low-latency semantic search', 'Dockerized deployment'],
+    featured: true
   },
   {
     title: 'Stock Market Prediction Engine',
@@ -140,7 +142,8 @@ export const PROJECTS = [
     imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
     categories: ['Data Engineering', 'Cloud Computing'],
     readme: 'Modern data warehouse with dbt and SCD2 patterns.',
-    metrics: ['20M+ records processed', 'SCD2 implementation', 'Cost-optimized ELT']
+    metrics: ['20M+ records processed', 'SCD2 implementation', 'Cost-optimized ELT'],
+    featured: true
   },
   {
     title: 'NYC Taxi Insights Platform',

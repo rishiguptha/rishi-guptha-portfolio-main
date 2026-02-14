@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import SectionTitle from './SectionTitle';
 import TerminalSkills from './TerminalSkills';
-import RAGPipelineViz from './RAGPipelineViz';
 
 const About: React.FC = () => {
   return (
@@ -43,23 +42,12 @@ const About: React.FC = () => {
             <TerminalSkills />
           </motion.div>
 
-          {/* RAG Pipeline Visualization */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-12"
-          >
-            <RAGPipelineViz />
-          </motion.div>
-
           {/* What I Do */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="pt-10 border-t border-border"
           >
             <h3 className="text-sm text-muted-foreground uppercase tracking-widest mb-6">

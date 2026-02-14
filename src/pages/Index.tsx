@@ -16,6 +16,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Skip to content - accessibility */}
+      <a
+        href="#about"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-primary focus:text-primary-foreground focus:text-sm focus:font-medium"
+      >
+        Skip to content
+      </a>
+
       <ScrollProgress />
       <Navbar />
 
@@ -97,7 +105,7 @@ const Index = () => {
                 className="flex flex-wrap gap-8 pt-6 border-t border-border"
               >
                 {[
-                  { value: '1.5+', label: 'Years experience' },
+                  { value: '3', label: 'Engineering roles' },
                   { value: '10+', label: 'Pipelines shipped' },
                   { value: '80%', label: 'Time saved (Nevara)' },
                 ].map((stat, idx) => (

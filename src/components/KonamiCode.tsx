@@ -121,7 +121,7 @@ const KonamiCode: React.FC<KonamiCodeProps> = ({ onActivate }) => {
                             >
                                 🎮
                             </motion.div>
-                            <h3 className="text-2xl font-bold gradient-text mb-2">
+                            <h3 className="text-2xl font-bold text-gradient mb-2">
                                 Developer Mode Activated!
                             </h3>
                             <p className="text-muted-foreground text-sm">

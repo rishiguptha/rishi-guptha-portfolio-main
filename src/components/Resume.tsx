@@ -42,13 +42,24 @@ const Resume: React.FC = () => {
 
                                         {/* Content */}
                                         <div className="flex-1 pb-12 border-b border-border last:border-0">
-                                            <h3 className="text-lg font-medium mb-1 group-hover:text-primary transition-colors">
-                                                {job.title}
-                                            </h3>
-                                            <p className="text-muted-foreground mb-4">
-                                                {job.company} · {job.location}
-                                            </p>
-                                            <p className="text-sm text-muted-foreground leading-relaxed">
+                                            <div className="flex items-center gap-3 mb-1">
+                                                {job.logo && (
+                                                    <img
+                                                        src={job.logo}
+                                                        alt={`${job.company} logo`}
+                                                        className="w-8 h-8 rounded-md object-contain bg-muted/50 p-0.5"
+                                                    />
+                                                )}
+                                                <div>
+                                                    <h3 className="text-lg font-medium group-hover:text-primary transition-colors">
+                                                        {job.title}
+                                                    </h3>
+                                                    <p className="text-muted-foreground">
+                                                        {job.company} · {job.location}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <p className="text-sm text-muted-foreground leading-relaxed mt-4">
                                                 {job.description}
                                             </p>
                                             {job.highlights && (
@@ -90,9 +101,18 @@ const Resume: React.FC = () => {
                                             {edu.date}
                                         </span>
                                     </div>
-                                    <div>
-                                        <h4 className="text-lg font-medium mb-1">{edu.degree}</h4>
-                                        <p className="text-muted-foreground">{edu.institution}</p>
+                                    <div className="flex items-center gap-3">
+                                        {edu.logo && (
+                                            <img
+                                                src={edu.logo}
+                                                alt={`${edu.institution} logo`}
+                                                className="w-8 h-8 rounded-md object-contain bg-muted/50 p-0.5"
+                                            />
+                                        )}
+                                        <div>
+                                            <h4 className="text-lg font-medium mb-1">{edu.degree}</h4>
+                                            <p className="text-muted-foreground">{edu.institution}</p>
+                                        </div>
                                     </div>
                                 </motion.div>
                             ))}
