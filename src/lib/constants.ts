@@ -53,19 +53,7 @@ export const EXPERIENCE = [
       '40% latency reduction via Lambda optimization'
     ]
   },
-  {
-    title: 'Data Science Research Assistant',
-    company: 'Stony Brook University',
-    location: 'Stony Brook, NY',
-    date: 'Jan 2025 – May 2025',
-    logo: '/company-logos/stony-brook.png',
-    description: 'Built an end-to-end Python and SQL pipeline to process 20+ years of S&P 500 data. Developed LSTM and CNN models (PyTorch) with R² of 0.82 (18% error reduction vs. ARIMA). Deployed a Streamlit dashboard for real-time strategy assessment.',
-    highlights: [
-      'Processed 20+ years of financial data',
-      'R² of 0.82 with LSTM/CNN models',
-      'Real-time Streamlit dashboard'
-    ]
-  },
+
   {
     title: 'Data Engineer Intern',
     company: 'Kimberly-Clark',
@@ -134,6 +122,16 @@ export const PROJECTS = [
     readme: 'Production RAG pipeline for semantic health research search.',
     githubLink: 'https://github.com/rishiguptha/nutismart_rag_project',
     metrics: ['1M+ tokens indexed', 'Low-latency semantic search', 'Dockerized deployment']
+  },
+  {
+    title: 'Stock Market Prediction Engine',
+    description: 'Attained R-Squared of 0.82 (18\% error reduction vs. ARIMA) by crafting end-to-end ML pipelines processing 20+ years of S\&P 500 data with programmatic feature normalization, deployed via Streamlit dashboard.',
+    technologies: ['Python', 'PyTorch', 'SQL', 'LSTM', 'Streamlit'],
+    imageUrl: 'https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=800&q=80',
+    categories: ['Machine Learning','Data Engineering', 'Deep Learning'],
+    readme: 'Production RAG pipeline for semantic health research search.',
+    githubLink: 'https://github.com/rishiguptha/sp500-forecast',
+    metrics: [ '20+years of S&P 500 data processed','R-Squared of 0.82']
   },
   {
     title: 'Snowflake Data Warehouse Modernization',
